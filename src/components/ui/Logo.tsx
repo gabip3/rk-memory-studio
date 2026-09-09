@@ -1,38 +1,56 @@
 import Link from "next/link";
+import Image from "next/image";
 import { cn } from "@/lib/cn";
 
 /**
- * The RK Memory Studio wordmark: a serif "RK" monogram in champagne gold beside
- * a stacked, letterspaced "MEMORY STUDIO" lockup.
+ * The RK Memory Studio wordmark: the supplied gold "RK" monogram beside a
+ * letterspaced "MEMORY STUDIO" lockup.
  *
- * Drawn in type rather than shipped as an image so it stays crisp at every
- * size, inherits the theme, and costs no extra request. If the business later
- * supplies a vector logo, swap the monogram span for an inline SVG - the
- * lockup, sizing and link behaviour stay as they are.
+ * Why the wordmark is live text rather than part of the image: the supplied
+ * lockup sets "MEMORY STUDIO" in black, which disappears on the charcoal
+ * footer and the dark editorial sections. The monogram is gold and reads on
+ * both grounds, so it ships as the image and the wordmark is typeset per
+ * context. That also keeps it crisp and selectable at header sizes, where the
+ * baked-in wordmark would be only a few pixels tall.
+ *
+ * The full supplied lockup is kept at /images/logo-lockup.png for light
+ * backgrounds, print and social cards.
  */
 
 type Tone = "light" | "dark";
 
+/** Intrinsic ratio of logo-mark.png (459x320), used to reserve space. */
+const MARK_RATIO = 459 / 320;
+
 export function LogoMark({
   className,
   tone = "light",
+  /** Rendered height in px. Width follows the intrinsic ratio. */
+  height = 40,
+  priority = false,
 }: {
   className?: string;
   tone?: Tone;
+  height?: number;
+  priority?: boolean;
 }) {
   return (
-    <span
+    <Image
+      src="/images/logo-mark.png"
+      alt=""
       aria-hidden="true"
+      width={Math.round(height * MARK_RATIO)}
+      height={height}
+      priority={priority}
       className={cn(
-        // Bebas Neue is already tightly set, so the monogram needs no negative
-        // tracking or letter overlap - both would collide the R into the K.
-        "font-display font-normal leading-none tracking-[0.01em]",
-        tone === "light" ? "text-gold-display" : "text-gold-on-dark",
+        "h-auto w-auto object-contain",
+        // The mark is gold on both grounds; on charcoal it just needs to not
+        // sit flat against the background.
+        tone === "dark" && "drop-shadow-[0_1px_2px_rgba(0,0,0,0.35)]",
         className
       )}
-    >
-      RK
-    </span>
+      style={{ height, width: "auto" }}
+    />
   );
 }
 
@@ -42,18 +60,18 @@ export function Logo({
   /** `sm` for the sticky/condensed header, `md` for the resting header. */
   size = "md",
   href = "/",
+  priority = false,
 }: {
   className?: string;
   tone?: Tone;
   size?: "sm" | "md";
   href?: string | null;
+  priority?: boolean;
 }) {
   const content = (
     <span className="flex items-center gap-2.5 sm:gap-3">
-      <LogoMark
-        tone={tone}
-        className={size === "sm" ? "text-[2rem]" : "text-[2.5rem] sm:text-[2.875rem]"}
-      />
+      <LogoMark tone={tone} height={size === "sm" ? 34 : 42} priority={priority} />
+
       <span
         className={cn(
           "flex flex-col font-sans font-medium uppercase leading-[1.35]",

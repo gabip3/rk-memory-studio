@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default function NotFound() {
   return (
     <Container className="flex min-h-[60vh] flex-col items-center justify-center py-24 text-center">
-      <LogoMark className="text-[3.5rem] opacity-35" />
+      <LogoMark height={64} className="opacity-40" />
 
       <h1 className="mt-8 text-display-m">
         This page has gone missing

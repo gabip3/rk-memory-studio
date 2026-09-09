@@ -72,7 +72,7 @@ export function InstagramGallery() {
                   className="relative grid aspect-square place-items-center border border-dashed border-gold/40 bg-[linear-gradient(145deg,#f7f2e9_0%,#efe6d7_50%,#e6dbc9_100%)]"
                   aria-hidden="true"
                 >
-                  <LogoMark className="text-[1.75rem] opacity-25" />
+                  <LogoMark height={34} className="opacity-30" />
                 </div>
               </Reveal>
             ))}

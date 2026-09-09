@@ -227,7 +227,8 @@ export function Header() {
 
           {/* Logo - centred on mobile, leading on desktop */}
           <div className="flex flex-1 justify-center lg:flex-none lg:justify-start">
-            <Logo size={condensed ? "sm" : "md"} />
+            {/* Above the fold and part of the first brand impression: never lazy. */}
+            <Logo size={condensed ? "sm" : "md"} priority />
           </div>
 
           {/* Desktop navigation */}

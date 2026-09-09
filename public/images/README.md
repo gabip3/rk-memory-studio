@@ -1,4 +1,21 @@
-# Photography
+# Photography and brand assets
+
+## Logo
+
+| File | What it is | Used for |
+|---|---|---|
+| `logo-mark.png` | Gold RK monogram, transparent | Header, footer, mobile menu, placeholder frames |
+| `logo-lockup.png` | Full supplied lockup, monogram + MEMORY STUDIO | Light backgrounds, social cards, print |
+| `../../brand/logo-source.png` | The original file, untouched | Master. Not served to visitors. |
+
+**Why the monogram is split out.** The supplied lockup sets "MEMORY STUDIO" in
+black, which disappears on the charcoal footer and the dark editorial sections.
+The monogram is gold and reads on both grounds, so it ships as the image while
+the wordmark is typeset in Poppins per context. That also keeps the wordmark
+crisp at header sizes, where the baked-in one would be a few pixels tall.
+
+If a version of the lockup with a light wordmark is ever supplied, drop it in
+and `Logo.tsx` can use the whole lockup on dark grounds too.
 
 Every image slot currently renders a designed, on-brand placeholder because no
 real photography has been supplied yet. Nothing here uses stock imagery that

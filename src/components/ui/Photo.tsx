@@ -107,10 +107,8 @@ function PhotoPlaceholder({
 
       <LogoMark
         tone={tone === "light" ? "light" : "dark"}
-        className={cn(
-          "text-[2.75rem] sm:text-[3.25rem]",
-          tone === "light" ? "opacity-30" : "opacity-40"
-        )}
+        height={52}
+        className={cn(tone === "light" ? "opacity-30" : "opacity-40")}
       />
 
       {label ? (
