@@ -4,6 +4,12 @@ import { productSlugs } from "@/lib/data/products";
 import { eventSlugs } from "@/lib/data/events";
 import { policySlugs, helpSlugs } from "@/lib/data/policies";
 
+/**
+ * Static by design: derived from build-time config. Marking it so is also
+ * what lets the static preview export (see next.config.ts) build.
+ */
+export const dynamic = "force-static";
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
 

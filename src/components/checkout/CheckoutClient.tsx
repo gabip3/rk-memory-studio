@@ -10,6 +10,9 @@ import { formatPrice } from "@/lib/format";
 import { site, isPlaceholder } from "@/lib/site";
 import type { CheckoutHandoff } from "@/lib/checkout/types";
 
+/** True only in the static GitHub Pages preview build, which has no API routes. */
+const DEMO_MODE = process.env.NEXT_PUBLIC_DEMO_MODE === "true";
+
 type EmbedHandoff = Extract<CheckoutHandoff, { status: "embed" }>;
 type EtsyHandoff = Extract<CheckoutHandoff, { status: "etsy" }>;
 
@@ -51,6 +54,19 @@ export function CheckoutClient({
 
   async function handleContinue(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+
+    // The preview build has no server, so say so rather than letting the fetch
+    // fail into a generic connection error.
+    if (DEMO_MODE) {
+      setPhase({
+        state: "unavailable",
+        message:
+          "This is a preview of the site design. Checkout is not connected here, " +
+          "and no order or photo has been sent anywhere.",
+      });
+      return;
+    }
+
     setPhase({ state: "submitting" });
 
     const data = new FormData(event.currentTarget);

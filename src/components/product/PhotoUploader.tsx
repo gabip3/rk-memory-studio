@@ -24,6 +24,9 @@ import type { UploadedPhoto } from "@/lib/uploads/types";
  * blocks the rest of the order.
  */
 
+/** True only in the static GitHub Pages preview build. */
+const DEMO_MODE = process.env.NEXT_PUBLIC_DEMO_MODE === "true";
+
 let counter = 0;
 const nextId = () => `photo-${Date.now().toString(36)}-${counter++}`;
 
@@ -72,6 +75,19 @@ export function PhotoUploader({
 
   const uploadOne = useCallback(
     async (file: File, photo: UploadedPhoto) => {
+      // The preview build has no API routes. Show the photo from the browser so
+      // the flow can be walked, and say plainly that nothing was sent.
+      if (DEMO_MODE) {
+        onChange((current) =>
+          current.map((p) =>
+            p.id === photo.id
+              ? { ...p, status: "stored" as const, storageKey: null, url: null }
+              : p
+          )
+        );
+        return;
+      }
+
       const body = new FormData();
       body.append("files", file);
       body.append("ids", photo.id);
@@ -310,6 +326,17 @@ export function PhotoUploader({
           </span>
         </label>
       </div>
+
+      {DEMO_MODE ? (
+        <p className="mt-4 flex items-start gap-2.5 border-l-2 border-gold bg-gold-wash px-4 py-3">
+          <Icon name="info" size={16} className="mt-0.5 shrink-0 text-gold-ink" />
+          <span className="text-[0.875rem] leading-relaxed text-ink">
+            <strong className="font-medium">Preview site.</strong> Your photos
+            stay in this browser and are not sent anywhere. On the live site they
+            upload to the studio at full resolution.
+          </span>
+        </p>
+      ) : null}
 
       {/* Guidance is persistent, not a placeholder that disappears */}
       <div className="mt-4 flex items-start gap-2.5 border-l-2 border-gold/50 bg-gold-wash/50 py-3 pl-4 pr-4">

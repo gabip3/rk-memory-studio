@@ -1,0 +1,74 @@
+# Publishes a STATIC PREVIEW of the storefront to GitHub Pages, so the design
+# can be shown from a link.
+#
+# This is a preview, NOT the production site. GitHub Pages serves files only and
+# cannot run a server, so this build has no API routes: photo upload previews in
+# the browser and nothing is sent, checkout is disabled, and the forms do not
+# submit. The UI says so on screen wherever it matters.
+#
+# For the real site, deploy the normal build (Next.js server) so that the
+# upload, Check Cherry handoff and enquiry forms actually work.
+
+name: Preview site
+
+on:
+  push:
+    branches: [master, main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Strip server-only code for the static export
+        run: |
+          # Route handlers cannot exist in a static export.
+          rm -rf src/app/api
+          # `force-dynamic` is meaningless without a server and blocks export.
+          find src/app -name '*.tsx' -print0 \
+            | xargs -0 sed -i '/^export const dynamic = "force-dynamic";$/d'
+
+      - name: Build static preview
+        env:
+          STATIC_EXPORT: "true"
+          PAGES_BASE_PATH: /rk-memory-studio
+          NEXT_PUBLIC_DEMO_MODE: "true"
+          NEXT_PUBLIC_SITE_URL: https://gabip3.github.io/rk-memory-studio
+          # Preview must never be indexed: it is not the real site.
+          NEXT_PUBLIC_SITE_INDEXABLE: "false"
+        run: npm run build
+
+      - name: Disable Jekyll so _next/ is served
+        run: touch out/.nojekyll
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: out
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
