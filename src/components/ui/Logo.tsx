@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { cn } from "@/lib/cn";
+import { asset } from "@/lib/asset";
 
 /**
  * The RK Memory Studio wordmark: the supplied gold "RK" monogram beside a
@@ -36,7 +37,7 @@ export function LogoMark({
 }) {
   return (
     <Image
-      src="/images/logo-mark.png"
+      src={asset("/images/logo-mark.png")}
       alt=""
       aria-hidden="true"
       width={Math.round(height * MARK_RATIO)}

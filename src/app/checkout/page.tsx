@@ -12,7 +12,6 @@ export const metadata: Metadata = {
 };
 
 /** Config is read per-request so switching env vars needs no rebuild. */
-export const dynamic = "force-dynamic";
 
 export default function CheckoutPage() {
   const { ready, provider, shopUrl } = getPublicCheckoutStatus();

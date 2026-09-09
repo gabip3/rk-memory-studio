@@ -50,6 +50,9 @@ jobs:
         env:
           STATIC_EXPORT: "true"
           PAGES_BASE_PATH: /rk-memory-studio
+          # next/image leaves its src alone once images are unoptimized, so the
+          # basePath has to be applied by hand. See src/lib/asset.ts.
+          NEXT_PUBLIC_BASE_PATH: /rk-memory-studio
           NEXT_PUBLIC_DEMO_MODE: "true"
           NEXT_PUBLIC_SITE_URL: https://gabip3.github.io/rk-memory-studio
           # Preview must never be indexed: it is not the real site.
