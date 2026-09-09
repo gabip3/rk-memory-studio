@@ -13,6 +13,24 @@ const eslintConfig = defineConfig([
     "build/**",
     "next-env.d.ts",
   ]),
+
+  {
+    rules: {
+      // We use destructuring to intentionally OMIT properties, e.g. stripping
+      // blob preview URLs before persisting the cart, or discarding styling
+      // props before spreading the rest onto a DOM element. Those bindings are
+      // unused by design, so mark them with a leading underscore.
+      "@typescript-eslint/no-unused-vars": [
+        "warn",
+        {
+          argsIgnorePattern: "^_",
+          varsIgnorePattern: "^_",
+          caughtErrorsIgnorePattern: "^_",
+          ignoreRestSiblings: true,
+        },
+      ],
+    },
+  },
 ]);
 
 export default eslintConfig;

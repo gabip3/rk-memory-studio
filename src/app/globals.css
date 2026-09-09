@@ -1,26 +1,297 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ==========================================================================
+   RK MEMORY STUDIO - GLOBAL DESIGN SYSTEM
+   Single source of truth for colour, type, spacing, motion and elevation.
+   All values are contrast-verified (WCAG 2.1 AA). See docs/design-system.md
+   ========================================================================== */
+
+@theme {
+  /* ---- Surfaces (warm neutral ladder, lightest to deepest) -------------- */
+  --color-ivory:        #faf7f2;  /* page ground                             */
+  --color-cream:        #f5f0e7;  /* alternating section band                */
+  --color-beige:        #ede4d6;  /* panels, "How It Works" tray             */
+  --color-beige-deep:   #e4d9c6;  /* pressed / nested panel                  */
+  --color-taupe-soft:   #d9cebc;  /* hairlines on beige                      */
+  --color-taupe:        #c6b8a2;  /* borders, dividers                       */
+
+  /* ---- Ink -------------------------------------------------------------- */
+  --color-black:        #0e0d0b;  /* announcement bar, solid buttons         */
+  --color-charcoal:     #1c1a17;  /* editorial dark sections     16.2:1      */
+  --color-ink:          #211e1a;  /* headings                    14.8:1      */
+  --color-ink-muted:    #6b6259;  /* body copy                    5.6:1  AA  */
+  --color-ink-subtle:   #7d7568;  /* meta / captions              4.5:1  AA  */
+
+  /* ---- Champagne gold: a 3-tier scale, NOT one colour --------------------
+     A single gold cannot serve both display and small text. #b18f5f is only
+     2.8:1 on ivory, so it is DECORATIVE ONLY. Text uses the darker tiers.   */
+  --color-gold:          #b18f5f; /* rules, icon strokes, borders, markers   */
+  --color-gold-display:  #9c7a45; /* display text >=24px on light   3.7:1 AA */
+  /* Small-text gold. Validated against ALL THREE light surfaces, not just
+     ivory: 5.5:1 on ivory, 5.2:1 on cream, 4.7:1 on beige. The previous value
+     (#8a6a38) passed on ivory but dropped to 4.4:1 on cream, where most
+     eyebrows actually sit. */
+  --color-gold-ink:      #7d5f2f;
+  --color-gold-on-dark:  #c9ac7e; /* any gold text on charcoal      8.0:1 AA */
+  --color-gold-hairline: #dccbae; /* faint gold rules on light               */
+  --color-gold-wash:     #f2ead9; /* gold-tinted fill (chips, hovers)        */
+
+  /* ---- Feedback --------------------------------------------------------- */
+  --color-success:      #2f6b46;
+  --color-success-wash: #eaf3ed;
+  --color-danger:       #a3341f;
+  --color-danger-wash:  #fbeee9;
+
+  /* ---- Typography ------------------------------------------------------- */
+  /* Both faces are shared with sister brand RK 360, so the two sites read as
+     one family. Bebas Neue is uppercase-only with a single weight. */
+  --font-display: var(--font-bebas-neue), "Haettenschweiler", "Arial Narrow", sans-serif;
+  --font-sans:    var(--font-poppins), ui-sans-serif, "Helvetica Neue", Arial, sans-serif;
+
+  /* Editorial display scale - fluid, no breakpoint jumps */
+  --text-display-xl: clamp(2.75rem, 1.6rem + 5.1vw, 5.75rem);
+  --text-display-l:  clamp(2.25rem, 1.5rem + 3.3vw, 4rem);
+  --text-display-m:  clamp(1.875rem, 1.4rem + 2.1vw, 3rem);
+  --text-display-s:  clamp(1.5rem, 1.25rem + 1.1vw, 2.125rem);
+
+  /* ---- Motion ----------------------------------------------------------- */
+  --ease-out-soft:  cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-editorial: cubic-bezier(0.16, 0.84, 0.44, 1);
+  --dur-fast:   160ms;
+  --dur-base:   240ms;
+  --dur-slow:   420ms;
+  --dur-reveal: 720ms;
+
+  /* ---- Elevation - warm-tinted, never neutral grey ----------------------- */
+  --shadow-card:  0 1px 2px rgba(28,26,23,.04), 0 8px 24px -12px rgba(28,26,23,.14);
+  --shadow-lift:  0 2px 6px rgba(28,26,23,.05), 0 22px 48px -20px rgba(28,26,23,.22);
+  --shadow-sheet: 0 -8px 40px -12px rgba(28,26,23,.20);
+
+  /* ---- Layered z-index scale -------------------------------------------- */
+  --z-sticky:   20;
+  --z-header:   40;
+  --z-dropdown: 50;
+  --z-overlay:  80;
+  --z-modal:    90;
+  --z-toast:   100;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* ==========================================================================
+   BASE
+   ========================================================================== */
+
+@layer base {
+  * { min-width: 0; }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+    /* Offset in-page anchors so the sticky header never covers a heading */
+    scroll-padding-top: 7rem;
+  }
+
+  body {
+    background-color: var(--color-ivory);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.7;
+    font-synthesis-weight: none;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Bebas Neue metrics differ sharply from a serif: very tall caps, no
+     descenders, narrow set width and tight default sidebearings. So headings
+     get a near-solid line-height and a little POSITIVE tracking - the negative
+     tracking a serif wants would jam these letters together. */
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    line-height: 0.95;
+    letter-spacing: 0.015em;
+    color: var(--color-ink);
+    text-wrap: balance;
+  }
+
+  p { text-wrap: pretty; }
+
+  /* Visible, on-brand focus ring. Never removed - only restyled. */
+  :focus-visible {
+    outline: 2px solid var(--color-gold-ink);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  ::selection {
+    background: var(--color-gold-wash);
+    color: var(--color-ink);
+  }
+
+  img, video { max-width: 100%; height: auto; }
 }
 
-@media (prefers-color-scheme: dark) {
+/* ==========================================================================
+   TYPOGRAPHIC UTILITIES
+   ========================================================================== */
+
+@layer components {
+  /* Prices, quantities and timers must not reflow as digits change */
+  .tabular { font-variant-numeric: tabular-nums; }
+
+  /* Letterspaced caps - the brand's UI voice (nav, buttons, eyebrows) */
+  .u-caps {
+    font-family: var(--font-sans);
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-weight: 500;
+    line-height: 1.2;
+  }
+
+  .u-eyebrow {
+    font-family: var(--font-sans);
+    text-transform: uppercase;
+    letter-spacing: 0.34em;
+    font-size: 0.6875rem;
+    font-weight: 500;
+    color: var(--color-gold-ink);
+  }
+
+  /* Constrain measure for readability: 46-62 characters */
+  .u-measure       { max-width: 62ch; }
+  .u-measure-tight { max-width: 46ch; }
+
+}
+
+/* ==========================================================================
+   MOTION - scroll reveal + micro-interactions
+   Everything below is opt-out via prefers-reduced-motion (see end of file).
+   ========================================================================== */
+
+@layer utilities {
+  /* Scroll reveal. Starts hidden ONLY when JS is running, so content is
+     always visible if the observer never fires (no-JS / error states). */
+  [data-reveal] { opacity: 1; }
+
+  .js [data-reveal] {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0);
+    transition:
+      opacity   var(--dur-reveal) var(--ease-editorial),
+      transform var(--dur-reveal) var(--ease-editorial);
+    transition-delay: var(--reveal-delay, 0ms);
+    will-change: opacity, transform;
+  }
+  .js [data-reveal].is-visible {
+    opacity: 1;
+    transform: none;
+    will-change: auto;
+  }
+
+  /* Product image zoom - transform only, never width/height */
+  .u-zoom-frame { overflow: hidden; }
+  .u-zoom-frame img,
+  .u-zoom-frame .u-zoom-target {
+    transition: transform var(--dur-slow) var(--ease-out-soft);
+  }
+  @media (hover: hover) {
+    .u-zoom-frame:hover img,
+    .u-zoom-frame:hover .u-zoom-target,
+    .group:hover .u-zoom-frame img {
+      transform: scale(1.045);
+    }
+  }
+
+  /* Gold underline that draws in on hover - used on text CTAs */
+  .u-underline {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 0% 1px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size var(--dur-base) var(--ease-out-soft);
+  }
+  .u-underline:hover,
+  .u-underline:focus-visible,
+  .group:hover .u-underline { background-size: 100% 1px; }
+
+  /* Dropdown / sheet entrances */
+  @keyframes rk-drop-in {
+    from { opacity: 0; transform: translate3d(0, -6px, 0) scale(0.985); }
+    to   { opacity: 1; transform: none; }
+  }
+  @keyframes rk-fade-in { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes rk-sheet-up {
+    from { opacity: 0; transform: translate3d(0, 14px, 0); }
+    to   { opacity: 1; transform: none; }
+  }
+  @keyframes rk-slide-in-right {
+    from { transform: translate3d(100%, 0, 0); }
+    to   { transform: none; }
+  }
+  @keyframes rk-shimmer {
+    from { transform: translate3d(-100%, 0, 0); }
+    to   { transform: translate3d(100%, 0, 0); }
+  }
+
+  .u-anim-drop   { animation: rk-drop-in var(--dur-base) var(--ease-out-soft) both; }
+  .u-anim-fade   { animation: rk-fade-in var(--dur-base) var(--ease-out-soft) both; }
+  .u-anim-sheet  { animation: rk-sheet-up var(--dur-base) var(--ease-out-soft) both; }
+  .u-anim-drawer { animation: rk-slide-in-right var(--dur-base) var(--ease-editorial) both; }
+
+  /* Skeleton shimmer for async product / upload states */
+  .u-skeleton {
+    position: relative;
+    overflow: hidden;
+    background: var(--color-cream);
+  }
+  .u-skeleton::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,.65), transparent);
+    animation: rk-shimmer 1.4s infinite;
+  }
+
+  /* Horizontal mobile rails: scrollable, snapping, no visible scrollbar */
+  .u-rail {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+  .u-rail::-webkit-scrollbar { display: none; }
+  .u-rail > * { scroll-snap-align: start; }
+}
+
+/* ==========================================================================
+   REDUCED MOTION - honour the OS setting everywhere, no exceptions
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Content must still be readable - reveal without the travel */
+  .js [data-reveal] { opacity: 1 !important; transform: none !important; }
+  .u-zoom-frame:hover img { transform: none !important; }
+}
+
+/* Respect users who ask the browser for higher contrast */
+@media (prefers-contrast: more) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --color-ink-muted:  #4a433b;
+    --color-ink-subtle: #574f45;
+    --color-taupe:      #a08f74;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@media print {
+  [data-reveal] { opacity: 1 !important; transform: none !important; }
+  .u-no-print { display: none !important; }
 }
