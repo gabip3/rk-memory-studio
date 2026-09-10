@@ -11,7 +11,7 @@ import { BrandStory } from "@/components/home/BrandStory";
 import { Reviews } from "@/components/home/Reviews";
 import { InstagramGallery } from "@/components/home/InstagramGallery";
 import { OrganizationJsonLd, WebSiteJsonLd } from "@/components/seo/JsonLd";
-import { site, OG_IMAGE } from "@/lib/site";
+import { site, isPlaceholder, OG_IMAGE } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: `${site.name} | ${site.positioning}`,
@@ -46,7 +46,8 @@ export default function HomePage() {
       <BulkOrdersCta />
       <BrandStory />
       <Reviews />
-      <InstagramGallery />
+      {/* Hidden until the account exists; see site.social.instagram. */}
+      {!isPlaceholder(site.social.instagram) ? <InstagramGallery /> : null}
     </>
   );
 }

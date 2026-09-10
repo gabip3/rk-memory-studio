@@ -33,6 +33,7 @@ export function MobileNav({
     href === "/" ? pathname === "/" : pathname.startsWith(href);
 
   const hasEmail = !isPlaceholder(site.contact.email);
+  const hasInstagram = !isPlaceholder(site.social.instagram);
 
   return (
     <div className="fixed inset-0 z-[var(--z-modal)] lg:hidden">
@@ -174,17 +175,19 @@ export function MobileNav({
                 </a>
               </li>
             ) : null}
-            <li>
-              <a
-                href={site.social.instagram}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex min-h-12 items-center gap-3 text-[0.9375rem] text-ink-muted transition-colors duration-[var(--dur-base)] hover:text-ink"
-              >
-                <Icon name="instagram" size={18} className="text-gold" />
-                {site.social.instagramHandle}
-              </a>
-            </li>
+            {hasInstagram ? (
+              <li>
+                <a
+                  href={site.social.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex min-h-12 items-center gap-3 text-[0.9375rem] text-ink-muted transition-colors duration-[var(--dur-base)] hover:text-ink"
+                >
+                  <Icon name="instagram" size={18} className="text-gold" />
+                  {site.social.instagramHandle}
+                </a>
+              </li>
+            ) : null}
           </ul>
         </nav>
 

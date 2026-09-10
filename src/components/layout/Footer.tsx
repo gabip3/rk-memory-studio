@@ -8,6 +8,7 @@ const year = new Date().getFullYear();
 
 export function Footer() {
   const hasEmail = !isPlaceholder(site.contact.email);
+  const hasInstagram = !isPlaceholder(site.social.instagram);
   const hasFacebook = !isPlaceholder(site.social.facebook);
 
   return (
@@ -45,33 +46,39 @@ export function Footer() {
               )}
             </div>
 
-            <div className="mt-7 flex items-center gap-3">
-              <a
-                href={site.social.instagram}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`RK Memory Studio on Instagram, ${site.social.instagramHandle} (opens in a new tab)`}
-                className="grid h-11 w-11 place-items-center border border-ivory/20 text-ivory/80 transition-colors duration-[var(--dur-base)] hover:border-gold-on-dark hover:text-gold-on-dark"
-              >
-                <Icon name="instagram" size={18} />
-              </a>
+            {hasInstagram || hasFacebook ? (
+              <div className="mt-7 flex items-center gap-3">
+                {hasInstagram ? (
+                  <a
+                    href={site.social.instagram}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`RK Memory Studio on Instagram, ${site.social.instagramHandle} (opens in a new tab)`}
+                    className="grid h-11 w-11 place-items-center border border-ivory/20 text-ivory/80 transition-colors duration-[var(--dur-base)] hover:border-gold-on-dark hover:text-gold-on-dark"
+                  >
+                    <Icon name="instagram" size={18} />
+                  </a>
+                ) : null}
 
-              {hasFacebook ? (
-                <a
-                  href={site.social.facebook}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="RK Memory Studio on Facebook (opens in a new tab)"
-                  className="grid h-11 w-11 place-items-center border border-ivory/20 text-ivory/80 transition-colors duration-[var(--dur-base)] hover:border-gold-on-dark hover:text-gold-on-dark"
-                >
-                  <Icon name="facebook" size={18} />
-                </a>
-              ) : null}
+                {hasFacebook ? (
+                  <a
+                    href={site.social.facebook}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="RK Memory Studio on Facebook (opens in a new tab)"
+                    className="grid h-11 w-11 place-items-center border border-ivory/20 text-ivory/80 transition-colors duration-[var(--dur-base)] hover:border-gold-on-dark hover:text-gold-on-dark"
+                  >
+                    <Icon name="facebook" size={18} />
+                  </a>
+                ) : null}
 
-              <span className="ml-1 text-[0.875rem] text-ivory/50">
-                {site.social.instagramHandle}
-              </span>
-            </div>
+                {hasInstagram ? (
+                  <span className="ml-1 text-[0.875rem] text-ivory/50">
+                    {site.social.instagramHandle}
+                  </span>
+                ) : null}
+              </div>
+            ) : null}
           </div>
 
           {/* Link columns */}

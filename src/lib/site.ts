@@ -62,9 +62,11 @@ export const site = {
     instagramHandle: "@RKMemoryStudio",
     /** Public Etsy storefront. Also set ETSY_SHOP_URL for the checkout handoff. */
     etsy: process.env.NEXT_PUBLIC_ETSY_SHOP_URL ?? PLACEHOLDER,
-    instagram:
-      process.env.NEXT_PUBLIC_INSTAGRAM_URL ??
-      "https://www.instagram.com/rkmemorystudio/",
+    /**
+     * No account exists yet, so every Instagram surface (home gallery, header
+     * bar, footer, mobile menu, contact page) stays hidden until this is set.
+     */
+    instagram: process.env.NEXT_PUBLIC_INSTAGRAM_URL ?? PLACEHOLDER,
     facebook: process.env.NEXT_PUBLIC_FACEBOOK_URL ?? PLACEHOLDER,
   },
 
@@ -177,7 +179,9 @@ export const footerNav: { title: string; links: NavChild[] }[] = [
     links: [
       { label: "Our Story", href: "/about" },
       { label: "Events", href: "/events" },
-      { label: "Instagram", href: site.social.instagram },
+      ...(isPlaceholder(site.social.instagram)
+        ? []
+        : [{ label: "Instagram", href: site.social.instagram }]),
     ],
   },
   {

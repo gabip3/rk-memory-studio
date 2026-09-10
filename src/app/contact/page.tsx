@@ -29,6 +29,7 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   const hasEmail = !isPlaceholder(site.contact.email);
+  const hasInstagram = !isPlaceholder(site.social.instagram);
 
   return (
     <>
@@ -86,27 +87,29 @@ export default function ContactPage() {
                   </div>
                 </li>
 
-                <li className="flex gap-4">
-                  <span
-                    aria-hidden="true"
-                    className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-gold/45 text-gold"
-                  >
-                    <Icon name="instagram" size={19} strokeWidth={1.2} />
-                  </span>
-                  <div>
-                    <h3 className="u-caps text-[0.625rem] tracking-[0.2em] text-ink-subtle">
-                      Instagram
-                    </h3>
-                    <a
-                      href={site.social.instagram}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="mt-1 block text-[1rem] text-ink transition-colors duration-[var(--dur-base)] hover:text-gold-ink"
+                {hasInstagram ? (
+                  <li className="flex gap-4">
+                    <span
+                      aria-hidden="true"
+                      className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-gold/45 text-gold"
                     >
-                      {site.social.instagramHandle}
-                    </a>
-                  </div>
-                </li>
+                      <Icon name="instagram" size={19} strokeWidth={1.2} />
+                    </span>
+                    <div>
+                      <h3 className="u-caps text-[0.625rem] tracking-[0.2em] text-ink-subtle">
+                        Instagram
+                      </h3>
+                      <a
+                        href={site.social.instagram}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mt-1 block text-[1rem] text-ink transition-colors duration-[var(--dur-base)] hover:text-gold-ink"
+                      >
+                        {site.social.instagramHandle}
+                      </a>
+                    </div>
+                  </li>
+                ) : null}
 
                 <li className="flex gap-4">
                   <span
