@@ -6,7 +6,7 @@ import { Reveal } from "@/components/ui/Reveal";
 import { Icon } from "@/components/ui/Icon";
 import { ContactForm } from "@/components/forms/ContactForm";
 import { BreadcrumbJsonLd } from "@/components/seo/JsonLd";
-import { site, isPlaceholder } from "@/lib/site";
+import { site, isPlaceholder, OG_IMAGE } from "@/lib/site";
 
 const crumbs = [
   { name: "Home", href: "/" },
@@ -19,6 +19,7 @@ export const metadata: Metadata = {
     "Have a question about an order, personalization or an event? Contact RK Memory Studio in Atlanta, Georgia.",
   alternates: { canonical: "/contact" },
   openGraph: {
+    images: [OG_IMAGE],
     title: "Contact Us | RK Memory Studio",
     description:
       "Questions about an order, personalization or an event - get in touch with RK Memory Studio.",

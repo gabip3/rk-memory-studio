@@ -95,7 +95,13 @@ export function FeaturedProduct() {
             src={product.images[0]?.src ?? null}
             alt={product.images[0]?.alt ?? product.name}
             placeholderLabel="Custom photo magnets"
-            ratio="4 / 5"
+            ratio={
+              // The photo's own proportions, so a landscape product shot is
+              // not cropped straight through its subject.
+              product.images[0]?.src
+                ? `${product.images[0].width} / ${product.images[0].height}`
+                : "4 / 5"
+            }
             zoom
             sizes="(max-width: 1024px) 100vw, 50vw"
           />

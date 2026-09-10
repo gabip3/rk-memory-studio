@@ -18,6 +18,25 @@ export const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ??
   "http://localhost:3000";
 
+/**
+ * The image shown when a link to the site is shared (WhatsApp, Facebook, X).
+ *
+ * An absolute URL on purpose. Next's file-based opengraph-image convention was
+ * tried first, but under the GitHub Pages basePath it produced
+ * /rk-memory-studio/rk-memory-studio/opengraph-image.jpg: Next prefixes the
+ * basePath onto the route, then joins it to metadataBase, which already
+ * contains it. An absolute URL is never joined, so it is right everywhere.
+ *
+ * Every page that sets its own `openGraph` must include it: a page's
+ * openGraph object REPLACES the layout's rather than merging with it.
+ */
+export const OG_IMAGE = {
+  url: `${SITE_URL}/images/og-image.jpg`,
+  width: 1200,
+  height: 630,
+  alt: "RK Memory Studio logo beside personalized square and round photo magnets on a linen tablecloth.",
+};
+
 export const site = {
   name: "RK Memory Studio",
   shortName: "RK Memory Studio",

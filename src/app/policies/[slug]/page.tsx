@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { ArticlePage } from "@/components/layout/ArticlePage";
 import { BreadcrumbJsonLd } from "@/components/seo/JsonLd";
 import { getPolicy, policySlugs } from "@/lib/data/policies";
+import { OG_IMAGE } from "@/lib/site";
 
 type Params = { params: Promise<{ slug: string }> };
 
@@ -21,6 +22,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
     description: page.seo.description,
     alternates: { canonical: `/policies/${page.slug}` },
     openGraph: {
+      images: [OG_IMAGE],
       title: `${page.seo.title} | RK Memory Studio`,
       description: page.seo.description,
       url: `/policies/${page.slug}`,

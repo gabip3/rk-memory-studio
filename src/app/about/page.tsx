@@ -6,7 +6,7 @@ import { Photo } from "@/components/ui/Photo";
 import { Button } from "@/components/ui/Button";
 import { BrandStory } from "@/components/home/BrandStory";
 import { BreadcrumbJsonLd } from "@/components/seo/JsonLd";
-import { site } from "@/lib/site";
+import { site, OG_IMAGE } from "@/lib/site";
 
 const crumbs = [
   { name: "Home", href: "/" },
@@ -19,6 +19,7 @@ export const metadata: Metadata = {
     "RK Memory Studio was created around a simple idea: meaningful moments deserve to become something you can keep. Based in Atlanta, Georgia.",
   alternates: { canonical: "/about" },
   openGraph: {
+    images: [OG_IMAGE],
     title: "About Us | RK Memory Studio",
     description:
       "We turn moments into keepsakes - personalized products created for families, celebrations, gifts and events.",
@@ -41,10 +42,10 @@ export default function AboutPage() {
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16 xl:gap-20">
           <Reveal>
             <Photo
-              src={null}
-              alt="A collection of finished personalized keepsakes arranged on a warm neutral studio surface."
+              src="/images/about.webp"
+              alt="Finished photo magnets in a ceramic dish beside photo keychains, a kraft gift box tied with ribbon and a spool of twine on a wooden table."
               placeholderLabel="Studio photography"
-              ratio="4 / 5"
+              ratio="5 / 4"
               priority
               zoom
               sizes="(max-width: 1024px) 100vw, 50vw"

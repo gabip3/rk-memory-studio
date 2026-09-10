@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { cn } from "@/lib/cn";
 import { LogoMark } from "./Logo";
+import { asset } from "@/lib/asset";
 
 /**
  * Photography slot.
@@ -57,7 +58,8 @@ export function Photo({
     >
       {src ? (
         <Image
-          src={src}
+          // Local files need the basePath under the Pages preview; see asset.ts.
+          src={src.startsWith("/") ? asset(src) : src}
           alt={alt}
           fill
           sizes={sizes}

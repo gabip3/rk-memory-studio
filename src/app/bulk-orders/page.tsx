@@ -5,6 +5,7 @@ import { Reveal } from "@/components/ui/Reveal";
 import { Icon } from "@/components/ui/Icon";
 import { BulkOrderForm } from "@/components/forms/BulkOrderForm";
 import { BreadcrumbJsonLd } from "@/components/seo/JsonLd";
+import { OG_IMAGE } from "@/lib/site";
 
 const crumbs = [
   { name: "Home", href: "/" },
@@ -17,6 +18,7 @@ export const metadata: Metadata = {
     "Custom bulk orders for weddings, corporate events, graduations and large celebrations. Tell us about your event and we will put a quote together.",
   alternates: { canonical: "/bulk-orders" },
   openGraph: {
+    images: [OG_IMAGE],
     title: "Bulk Orders & Event Quotes | RK Memory Studio",
     description:
       "Custom bulk keepsake orders for weddings, corporate events, graduations and large celebrations.",

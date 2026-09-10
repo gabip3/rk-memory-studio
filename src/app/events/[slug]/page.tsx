@@ -10,6 +10,7 @@ import { ProductCard } from "@/components/shop/ProductCard";
 import { BreadcrumbJsonLd } from "@/components/seo/JsonLd";
 import { getEvent, eventSlugs } from "@/lib/data/events";
 import { getProduct } from "@/lib/data/products";
+import { OG_IMAGE } from "@/lib/site";
 
 type Params = { params: Promise<{ slug: string }> };
 
@@ -28,6 +29,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
     description: event.seo.description,
     alternates: { canonical: `/events/${event.slug}` },
     openGraph: {
+      images: [OG_IMAGE],
       title: `${event.seo.title} | RK Memory Studio`,
       description: event.seo.description,
       url: `/events/${event.slug}`,

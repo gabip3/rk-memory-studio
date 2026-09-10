@@ -84,8 +84,8 @@ export function Hero() {
         {/* ---- Photography ------------------------------------------------ */}
         <div className="relative lg:h-full">
           <Photo
-            src={null}
-            alt="A collection of custom photo magnets arranged on a refrigerator door, showing a family at the beach, a wedding couple, a baby, a golden retriever and a sunset vacation photograph."
+            src="/images/hero.webp"
+            alt="Six personalized photo magnets, squares and rounds, on a stainless steel refrigerator door: a golden retriever, a palm tree sunset, a laughing couple, a sleeping newborn, a wedding portrait and a family walking on the beach."
             placeholderLabel="Hero photography"
             ratio="4 / 3"
             className="h-full lg:absolute lg:inset-0 lg:aspect-auto"

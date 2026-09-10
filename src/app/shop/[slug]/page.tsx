@@ -12,6 +12,7 @@ import { ProductConfigurator } from "@/components/product/ProductConfigurator";
 import { BreadcrumbJsonLd, ProductJsonLd } from "@/components/seo/JsonLd";
 import { getProduct, products, productSlugs } from "@/lib/data/products";
 import { photoGuidelines } from "@/lib/data/content";
+import { OG_IMAGE } from "@/lib/site";
 
 type Params = { params: Promise<{ slug: string }> };
 
@@ -31,6 +32,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
     description: product.seo.description,
     alternates: { canonical: `/shop/${product.slug}` },
     openGraph: {
+      images: [OG_IMAGE],
       title: `${product.seo.title} | RK Memory Studio`,
       description: product.seo.description,
       url: `/shop/${product.slug}`,
@@ -75,7 +77,13 @@ export default async function ProductPage({ params }: Params) {
                 src={product.images[0]?.src ?? null}
                 alt={product.images[0]?.alt ?? product.name}
                 placeholderLabel={product.name}
-                ratio="4 / 5"
+                ratio={
+                  // The photo's own proportions, so a landscape product shot is
+                  // not cropped straight through its subject.
+                  product.images[0]?.src
+                    ? `${product.images[0].width} / ${product.images[0].height}`
+                    : "4 / 5"
+                }
                 priority
                 zoom
                 sizes="(max-width: 1024px) 100vw, 45vw"

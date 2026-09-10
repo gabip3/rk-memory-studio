@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Bebas_Neue, Poppins } from "next/font/google";
-import { site, SITE_URL } from "@/lib/site";
+import { site, SITE_URL, OG_IMAGE } from "@/lib/site";
 import { CartProvider } from "@/lib/cart/CartProvider";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { AnnouncementBar } from "@/components/layout/AnnouncementBar";
@@ -61,6 +61,7 @@ export const metadata: Metadata = {
   authors: [{ name: site.name }],
   creator: site.name,
   openGraph: {
+    images: [OG_IMAGE],
     type: "website",
     locale: site.locale,
     url: SITE_URL,
@@ -69,6 +70,7 @@ export const metadata: Metadata = {
     description: site.description,
   },
   twitter: {
+    images: [OG_IMAGE.url],
     card: "summary_large_image",
     title: `${site.name} | ${site.positioning}`,
     description: site.description,

@@ -6,6 +6,7 @@ import { Accordion, AccordionItem } from "@/components/ui/Accordion";
 import { Button } from "@/components/ui/Button";
 import { BreadcrumbJsonLd, FaqJsonLd } from "@/components/seo/JsonLd";
 import { faqsByGroup } from "@/lib/data/faq";
+import { OG_IMAGE } from "@/lib/site";
 
 const crumbs = [
   { name: "Home", href: "/" },
@@ -18,6 +19,7 @@ export const metadata: Metadata = {
     "How to send your photos, what photo quality to use, adding names and dates, keepsakes for events, and how ordering works at RK Memory Studio.",
   alternates: { canonical: "/faq" },
   openGraph: {
+    images: [OG_IMAGE],
     title: "FAQ | RK Memory Studio",
     description:
       "Answers about photos, personalization, events and ordering personalized keepsakes.",

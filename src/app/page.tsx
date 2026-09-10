@@ -11,13 +11,14 @@ import { BrandStory } from "@/components/home/BrandStory";
 import { Reviews } from "@/components/home/Reviews";
 import { InstagramGallery } from "@/components/home/InstagramGallery";
 import { OrganizationJsonLd, WebSiteJsonLd } from "@/components/seo/JsonLd";
-import { site } from "@/lib/site";
+import { site, OG_IMAGE } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: `${site.name} | ${site.positioning}`,
   description: site.description,
   alternates: { canonical: "/" },
   openGraph: {
+    images: [OG_IMAGE],
     title: `${site.name} | ${site.positioning}`,
     description: site.description,
     url: "/",

@@ -36,8 +36,8 @@ export const eventCategories: EventCategory[] = [
     ],
     relatedProducts: ["custom-photo-magnets", "photo-strips", "event-keepsakes"],
     image: {
-      src: null,
-      alt: "A wedding keepsake magnet showing a bride and groom, resting on a linen surface.",
+      src: "/images/event-weddings.webp",
+      alt: "A square photo magnet of a bride and groom on a reception table beside a champagne glass, a candle and a folded napkin.",
     },
     featuredOnHome: true,
     seo: {
@@ -61,8 +61,8 @@ export const eventCategories: EventCategory[] = [
     ],
     relatedProducts: ["custom-photo-magnets", "photo-keychains", "event-keepsakes"],
     image: {
-      src: null,
-      alt: "A personalized birthday keepsake magnet with a name and celebration date.",
+      src: "/images/event-birthdays.webp",
+      alt: "A round photo magnet of a little girl blowing out birthday candles, on a table with leftover cake and party plates.",
     },
     featuredOnHome: true,
     seo: {
@@ -86,8 +86,8 @@ export const eventCategories: EventCategory[] = [
     ],
     relatedProducts: ["custom-photo-magnets", "event-keepsakes", "personalized-gifts"],
     image: {
-      src: null,
-      alt: "A baby shower keepsake magnet featuring a newborn photograph.",
+      src: "/images/event-baby-showers.webp",
+      alt: "A square photo magnet of a sleeping newborn on a muslin blanket beside a pacifier and a knit bear-ear hat.",
     },
     featuredOnHome: false,
     seo: {
@@ -112,8 +112,8 @@ export const eventCategories: EventCategory[] = [
     ],
     relatedProducts: ["custom-photo-magnets", "photo-keychains", "event-keepsakes"],
     image: {
-      src: null,
-      alt: "A graduation keepsake magnet featuring a graduate in cap and gown.",
+      src: "/images/event-graduations.webp",
+      alt: "A round photo magnet of a smiling graduate in cap and gown on a refrigerator, next to a hanging graduation tassel.",
     },
     featuredOnHome: true,
     seo: {
@@ -138,8 +138,8 @@ export const eventCategories: EventCategory[] = [
     ],
     relatedProducts: ["event-keepsakes", "custom-photo-magnets", "photo-strips"],
     image: {
-      src: null,
-      alt: "A branded corporate event keepsake magnet featuring a company logo.",
+      src: "/images/event-corporate.webp",
+      alt: "Stacks of branded square magnets printed with a black and gold logo on a registration table at a corporate event, beside lanyards.",
     },
     featuredOnHome: true,
     seo: {
@@ -163,8 +163,8 @@ export const eventCategories: EventCategory[] = [
     ],
     relatedProducts: ["custom-photo-magnets", "photo-keychains", "personalized-gifts"],
     image: {
-      src: null,
-      alt: "A memorial keepsake featuring a treasured family photograph.",
+      src: "/images/event-memorial.webp",
+      alt: "A square photo magnet of an elderly couple smiling together, on a wooden side table beside a lit candle and reading glasses.",
     },
     featuredOnHome: false,
     seo: {

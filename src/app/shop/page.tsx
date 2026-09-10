@@ -7,6 +7,7 @@ import { HowItWorks } from "@/components/home/HowItWorks";
 import { BulkOrdersCta } from "@/components/home/BulkOrdersCta";
 import { BreadcrumbJsonLd } from "@/components/seo/JsonLd";
 import { products } from "@/lib/data/products";
+import { OG_IMAGE } from "@/lib/site";
 
 const crumbs = [
   { name: "Home", href: "/" },
@@ -19,6 +20,7 @@ export const metadata: Metadata = {
     "Custom photo magnets, personalized photo keychains, photo strip keepsakes, event favours and personalized gifts - each one made from the photographs you upload.",
   alternates: { canonical: "/shop" },
   openGraph: {
+    images: [OG_IMAGE],
     title: "Shop Personalized Keepsakes | RK Memory Studio",
     description:
       "Custom photo magnets, photo keychains, event keepsakes and personalized gifts made from your own photographs.",

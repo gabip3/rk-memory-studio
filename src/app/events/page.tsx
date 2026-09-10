@@ -8,6 +8,7 @@ import { Icon } from "@/components/ui/Icon";
 import { BulkOrdersCta } from "@/components/home/BulkOrdersCta";
 import { BreadcrumbJsonLd } from "@/components/seo/JsonLd";
 import { eventCategories } from "@/lib/data/events";
+import { OG_IMAGE } from "@/lib/site";
 
 const crumbs = [
   { name: "Home", href: "/" },
@@ -20,6 +21,7 @@ export const metadata: Metadata = {
     "Personalized keepsakes for weddings, birthdays, baby showers, graduations, corporate events and memorials - favours your guests will actually take home.",
   alternates: { canonical: "/events" },
   openGraph: {
+    images: [OG_IMAGE],
     title: "Event Keepsakes & Favours | RK Memory Studio",
     description:
       "Personalized event keepsakes for weddings, birthdays, graduations, corporate events and more.",

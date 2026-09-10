@@ -12,8 +12,8 @@ export function Keychains() {
       <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16 xl:gap-20">
         <Reveal>
           <Photo
-            src={null}
-            alt="Two personalized photo keychains resting on a linen surface, one showing a couple and one showing a golden retriever."
+            src="/images/keychains.webp"
+            alt="Two clear acrylic photo keychains with gold rings on a linen cloth, one showing a laughing couple and the other a golden retriever puppy."
             placeholderLabel="Photo keychains"
             ratio="5 / 4"
             zoom

@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/Button";
 import { HowItWorks } from "@/components/home/HowItWorks";
 import { BreadcrumbJsonLd } from "@/components/seo/JsonLd";
 import { photoGuidelines } from "@/lib/data/content";
+import { OG_IMAGE } from "@/lib/site";
 
 const crumbs = [
   { name: "Home", href: "/" },
@@ -19,6 +20,7 @@ export const metadata: Metadata = {
     "Choose your keepsake, upload your photos, and we create it individually for you. Here is exactly what happens between your camera roll and your keepsake.",
   alternates: { canonical: "/how-it-works" },
   openGraph: {
+    images: [OG_IMAGE],
     title: "How It Works | RK Memory Studio",
     description:
       "Choose it, upload it, we create it, love it - how your photographs become keepsakes.",

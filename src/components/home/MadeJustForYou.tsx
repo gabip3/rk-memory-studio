@@ -16,8 +16,8 @@ export function MadeJustForYou() {
       <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16 xl:gap-20">
         <Reveal className="order-2 lg:order-1">
           <Photo
-            src={null}
-            alt="A hand holding a custom photo magnet showing a father and daughter, with a softly blurred kitchen behind."
+            src="/images/made-for-you.webp"
+            alt="A hand holding a square photo magnet of a father hugging his son and daughter, with more photo magnets on the refrigerator behind."
             placeholderLabel="Lifestyle photography"
             ratio="5 / 4"
             zoom
