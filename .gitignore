@@ -45,3 +45,6 @@ next-env.d.ts
 
 # customer photo uploads - personal data, never commit
 /.uploads
+
+# local static-preview builds (scripts/build-preview.mjs)
+/.preview-build

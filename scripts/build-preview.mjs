@@ -5,43 +5,59 @@
  * The preview cannot contain API routes or `force-dynamic`, so producing it
  * means deleting things. Doing that in place is how a real mistake happened
  * once: an unrelated `git add -A` ran while the routes were deleted, and
- * committed their removal. So this copies the project to a temp directory and
- * does the surgery there. Your source is never modified.
+ * committed their removal. So this copies the project and does the surgery on
+ * the copy. Your source is never modified.
  *
  *   npm run build:preview
  *
- * CI performs the same steps in .github/workflows/preview.yml.
+ * WHERE THE COPY LIVES, and why. It is built in `.preview-build/` inside this
+ * project (git-, tsc- and eslint-ignored), not in the system temp folder. Two
+ * earlier versions used the temp folder with a link to node_modules; both
+ * failed, because the temp folder is on a different drive from the project
+ * and neither Turbopack nor webpack can build across drives. Inside the
+ * project, no link is needed at all: package resolution walks up one level and
+ * finds the real node_modules. The copy deliberately has no package-lock.json,
+ * so Next treats this project as the root when it looks for one.
+ *
+ * It builds with the default bundler, the same as CI.
  */
 import {
   cpSync,
   rmSync,
+  mkdirSync,
   mkdtempSync,
   readdirSync,
   readFileSync,
   writeFileSync,
   existsSync,
-  symlinkSync,
 } from "node:fs";
 import { join } from "node:path";
-import { tmpdir } from "node:os";
 import { execSync } from "node:child_process";
 
 const root = process.cwd();
-const work = mkdtempSync(join(tmpdir(), "rkms-preview-"));
-const SKIP = new Set([".next", "out", ".git", "node_modules", ".uploads"]);
+const buildsDir = join(root, ".preview-build");
+
+// Only plain copies ever live here (no links), so clearing it is safe.
+rmSync(buildsDir, { recursive: true, force: true });
+mkdirSync(buildsDir, { recursive: true });
+const work = mkdtempSync(join(buildsDir, "run-"));
+
+// `.preview-build` must be skipped or the copy would recurse into itself.
+const SKIP = new Set([
+  ".next",
+  "out",
+  ".git",
+  "node_modules",
+  ".uploads",
+  ".preview-build",
+  "package-lock.json",
+]);
 
 console.log(`Building preview in ${work}`);
 
 for (const entry of readdirSync(root)) {
   if (SKIP.has(entry)) continue;
   cpSync(join(root, entry), join(work, entry), { recursive: true });
-}
-
-// node_modules is large; link it rather than copying a few hundred megabytes.
-try {
-  symlinkSync(join(root, "node_modules"), join(work, "node_modules"), "junction");
-} catch {
-  cpSync(join(root, "node_modules"), join(work, "node_modules"), { recursive: true });
 }
 
 // A static export cannot contain route handlers.
