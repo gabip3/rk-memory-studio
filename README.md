@@ -44,7 +44,7 @@ items, each rendering an honest placeholder state until you supply the truth:
 | **Pricing** | `src/lib/data/products.ts` | "Confirmed at checkout": no invented figures |
 | **Production times** | `src/lib/data/faq.ts` | FAQ marked *pending*, excluded from FAQ structured data |
 | **Shipping costs** | `src/lib/data/policies.ts` | Policy page carries a visible "coming before launch" notice |
-| **Reviews** | `src/lib/data/social-proof.ts` | Empty array → designed empty state. **No fake reviews.** |
+| **Reviews** | `src/lib/data/social-proof.ts` | Empty array → the section is left off the home page. **No fake reviews.** |
 | **Instagram account** | `NEXT_PUBLIC_INSTAGRAM_URL` | No account yet: the home gallery and every Instagram link stay hidden until it is set |
 | **Instagram posts** | `src/lib/data/social-proof.ts` | Empty array → reserved frames + profile link (once the account is set) |
 | **Terms / Refund policy** | `src/lib/data/policies.ts` | Honest placeholder; Privacy is a factual draft pending legal review |

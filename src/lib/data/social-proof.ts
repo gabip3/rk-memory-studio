@@ -4,8 +4,9 @@
  * BOTH ARRAYS ARE INTENTIONALLY EMPTY.
  *
  * No customer names, quotes, ratings or Instagram posts have been supplied, and
- * none may be invented. The `ReviewsSection` and `InstagramGallery` components
- * detect the empty arrays and render a designed empty state instead.
+ * none may be invented. While `reviews` is empty the home page leaves the
+ * `Reviews` section out entirely; `InstagramGallery` stays hidden until an
+ * Instagram URL is configured, then shows reserved frames until posts arrive.
  *
  * To go live: push real, verified entries into these arrays (or swap the
  * loaders for a reviews platform / the Instagram Basic Display API - the

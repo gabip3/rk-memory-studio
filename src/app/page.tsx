@@ -9,6 +9,7 @@ import { EventKeepsakes } from "@/components/home/EventKeepsakes";
 import { BulkOrdersCta } from "@/components/home/BulkOrdersCta";
 import { BrandStory } from "@/components/home/BrandStory";
 import { Reviews } from "@/components/home/Reviews";
+import { hasReviews } from "@/lib/data/social-proof";
 import { InstagramGallery } from "@/components/home/InstagramGallery";
 import { OrganizationJsonLd, WebSiteJsonLd } from "@/components/seo/JsonLd";
 import { site, isPlaceholder, OG_IMAGE } from "@/lib/site";
@@ -40,12 +41,15 @@ export default function HomePage() {
       </div>
 
       <MadeJustForYou />
+      {/* Dark bands alternate with light ones and never touch each other or
+          the charcoal footer, so the page ends on the bulk card's ivory band. */}
+      <BrandStory />
       <FeaturedProduct />
       <Keychains />
       <EventKeepsakes />
       <BulkOrdersCta />
-      <BrandStory />
-      <Reviews />
+      {/* Real, verified reviews only; nothing shows until the first one exists. */}
+      {hasReviews() ? <Reviews /> : null}
       {/* Hidden until the account exists; see site.social.instagram. */}
       {!isPlaceholder(site.social.instagram) ? <InstagramGallery /> : null}
     </>

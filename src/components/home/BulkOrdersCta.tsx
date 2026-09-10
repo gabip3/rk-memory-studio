@@ -7,8 +7,9 @@ import { Eyebrow } from "@/components/ui/Section";
  * Bulk orders call to action.
  *
  * A black panel edged in champagne gold, sitting on the ivory page rather than
- * filling a full band - so it reads as a distinct card between the two dark
- * sections either side of it, instead of merging into one long dark passage.
+ * filling a full band - so it reads as a distinct card between the dark events
+ * section above and the charcoal footer below, instead of merging into one
+ * long dark passage.
  */
 export function BulkOrdersCta() {
   return (
