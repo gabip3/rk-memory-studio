@@ -39,8 +39,8 @@ items, each rendering an honest placeholder state until you supply the truth:
 | Item | Where | Current behaviour |
 |---|---|---|
 | **Check Cherry checkout** | `.env.local` | `/checkout` explains it is not live and offers a contact route |
-| **Business email** | `NEXT_PUBLIC_CONTACT_EMAIL` | Shows "email address is being set up", never a fake address |
-| **Product photography** | `public/images/` | Designed on-brand placeholder frames |
+| ~~Business email~~ | `src/lib/site.ts` | Supplied: rkmemorystudio@gmail.com. Override with `NEXT_PUBLIC_CONTACT_EMAIL` |
+| **Photo strips photo** | `public/images/` | The one image slot still empty: its product page shows a placeholder frame |
 | **Pricing** | `src/lib/data/products.ts` | "Confirmed at checkout": no invented figures |
 | **Production times** | `src/lib/data/faq.ts` | FAQ marked *pending*, excluded from FAQ structured data |
 | **Shipping costs** | `src/lib/data/policies.ts` | Policy page carries a visible "coming before launch" notice |
@@ -150,7 +150,7 @@ npm run lint    # eslint
 
 ## Before deploying
 
-- [ ] Set `NEXT_PUBLIC_SITE_URL` to the real domain
+- [ ] Set `NEXT_PUBLIC_SITE_URL` to `https://www.rkmemorystudio.com`
 - [ ] Set `NEXT_PUBLIC_SITE_INDEXABLE=true` **only on production** (staging
       otherwise serves a `Disallow: /` robots.txt)
 - [ ] Configure Check Cherry: see the integration doc
@@ -159,6 +159,6 @@ npm run lint    # eslint
 - [ ] Replace the `local` upload provider with an object store if deploying
       serverless (Vercel/Netlify filesystems are ephemeral)
 - [ ] Set `ENQUIRY_TRANSPORT` so the contact and bulk-order forms deliver
-- [ ] Add the business email address
+- [x] Add the business email address (rkmemorystudio@gmail.com, in site.ts)
 - [ ] Add real photography
 - [ ] Have the Privacy Policy legally reviewed; publish Terms, Shipping, Refund

@@ -49,13 +49,21 @@ export const site = {
   url: SITE_URL,
   locale: "en_US",
 
-  /** Contact. Email is a placeholder until the business address is provided. */
+  /**
+   * Contact. The email is the studio address the owner uses for customers, so
+   * it is the default rather than an env-only value: a forgotten variable would
+   * otherwise put "email address coming soon" on a live site. Env still wins.
+   *
+   * The phone is env-only and nothing displays it yet, so it stays unset until
+   * the studio decides whether to publish a number.
+   */
   contact: {
-    email: process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? PLACEHOLDER,
+    email: process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "rkmemorystudio@gmail.com",
     phone: process.env.NEXT_PUBLIC_CONTACT_PHONE ?? PLACEHOLDER,
-    location: "Atlanta, Georgia",
+    /** City only, never the street address: the studio address is a home. */
+    location: "Marietta, Georgia",
     /** Free-form service-area note; safe to edit. */
-    serviceArea: "Serving Atlanta and shipping nationwide.",
+    serviceArea: "Serving Marietta, Atlanta and shipping nationwide.",
   },
 
   social: {
