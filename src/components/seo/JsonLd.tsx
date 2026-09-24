@@ -1,4 +1,4 @@
-import { site, SITE_URL, isPlaceholder } from "@/lib/site";
+import { site, SITE_URL, isPlaceholder, telHref } from "@/lib/site";
 import type { Product } from "@/lib/data/products";
 import { aggregateRating } from "@/lib/data/social-proof";
 import { faqsForStructuredData } from "@/lib/data/faq";
@@ -45,11 +45,18 @@ export function OrganizationJsonLd() {
           addressCountry: "US",
         },
         ...(sameAs.length > 0 && { sameAs }),
-        ...(!isPlaceholder(site.contact.email) && {
+        ...((!isPlaceholder(site.contact.email) ||
+          !isPlaceholder(site.contact.phone)) && {
           contactPoint: {
             "@type": "ContactPoint",
             contactType: "customer service",
-            email: site.contact.email,
+            ...(!isPlaceholder(site.contact.email) && {
+              email: site.contact.email,
+            }),
+            // E.164, which is what search engines expect here.
+            ...(!isPlaceholder(site.contact.phone) && {
+              telephone: telHref(site.contact.phone).replace("tel:", ""),
+            }),
             areaServed: "US",
             availableLanguage: "English",
           },

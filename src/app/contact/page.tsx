@@ -6,7 +6,7 @@ import { Reveal } from "@/components/ui/Reveal";
 import { Icon } from "@/components/ui/Icon";
 import { ContactForm } from "@/components/forms/ContactForm";
 import { BreadcrumbJsonLd } from "@/components/seo/JsonLd";
-import { site, isPlaceholder, OG_IMAGE } from "@/lib/site";
+import { site, isPlaceholder, telHref, OG_IMAGE } from "@/lib/site";
 
 const crumbs = [
   { name: "Home", href: "/" },
@@ -29,6 +29,7 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   const hasEmail = !isPlaceholder(site.contact.email);
+  const hasPhone = !isPlaceholder(site.contact.phone);
   const hasInstagram = !isPlaceholder(site.social.instagram);
 
   return (
@@ -86,6 +87,28 @@ export default function ContactPage() {
                     )}
                   </div>
                 </li>
+
+                {hasPhone ? (
+                  <li className="flex gap-4">
+                    <span
+                      aria-hidden="true"
+                      className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-gold/45 text-gold"
+                    >
+                      <Icon name="phone" size={19} strokeWidth={1.2} />
+                    </span>
+                    <div>
+                      <h3 className="u-caps text-[0.625rem] tracking-[0.2em] text-ink-subtle">
+                        Phone
+                      </h3>
+                      <a
+                        href={telHref(site.contact.phone)}
+                        className="mt-1 block text-[1rem] text-ink transition-colors duration-[var(--dur-base)] hover:text-gold-ink"
+                      >
+                        {site.contact.phone}
+                      </a>
+                    </div>
+                  </li>
+                ) : null}
 
                 {hasInstagram ? (
                   <li className="flex gap-4">

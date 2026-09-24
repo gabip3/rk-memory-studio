@@ -13,6 +13,16 @@ export function isPlaceholder(value: string | undefined | null): boolean {
   return !value || value === PLACEHOLDER || value.startsWith("__");
 }
 
+/**
+ * `tel:` href for a number written for humans, e.g. "678-800-0811".
+ * Ten digits are assumed to be US and get the +1 country code, so the link
+ * works from a phone abroad as well as at home.
+ */
+export function telHref(phone: string): string {
+  const digits = phone.replace(/\D/g, "");
+  return digits.length === 10 ? `tel:+1${digits}` : `tel:${digits}`;
+}
+
 /** Canonical origin. Set NEXT_PUBLIC_SITE_URL in every environment. */
 export const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ??
@@ -50,20 +60,23 @@ export const site = {
   locale: "en_US",
 
   /**
-   * Contact. The email is the studio address the owner uses for customers, so
-   * it is the default rather than an env-only value: a forgotten variable would
-   * otherwise put "email address coming soon" on a live site. Env still wins.
+   * Contact, as published on the studio's own business card. These are code
+   * defaults rather than env-only values: a forgotten variable on a live host
+   * would otherwise show customers a "coming soon" state. Env still wins.
    *
-   * The phone is env-only and nothing displays it yet, so it stays unset until
-   * the studio decides whether to publish a number.
+   * The email is the Gmail address, NOT info@rkmemorystudio.com from the card:
+   * that domain has no MX record, so mail sent to it goes nowhere. Switch it
+   * the day a mailbox exists and a test message actually arrives.
+   *
+   * The street address is deliberately absent. The registered address is a
+   * home, and the card itself says "Atlanta, GA", so the city is all we show.
    */
   contact: {
     email: process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "rkmemorystudio@gmail.com",
-    phone: process.env.NEXT_PUBLIC_CONTACT_PHONE ?? PLACEHOLDER,
-    /** City only, never the street address: the studio address is a home. */
-    location: "Marietta, Georgia",
+    phone: process.env.NEXT_PUBLIC_CONTACT_PHONE ?? "678-800-0811",
+    location: "Atlanta, Georgia",
     /** Free-form service-area note; safe to edit. */
-    serviceArea: "Serving Marietta, Atlanta and shipping nationwide.",
+    serviceArea: "Serving Atlanta and shipping nationwide.",
   },
 
   social: {

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { footerNav, site, isPlaceholder } from "@/lib/site";
+import { footerNav, site, isPlaceholder, telHref } from "@/lib/site";
 import { Logo } from "@/components/ui/Logo";
 import { Icon } from "@/components/ui/Icon";
 import { Container } from "@/components/ui/Section";
@@ -8,6 +8,7 @@ const year = new Date().getFullYear();
 
 export function Footer() {
   const hasEmail = !isPlaceholder(site.contact.email);
+  const hasPhone = !isPlaceholder(site.contact.phone);
   const hasInstagram = !isPlaceholder(site.social.instagram);
   const hasFacebook = !isPlaceholder(site.social.facebook);
 
@@ -29,6 +30,16 @@ export function Footer() {
                 <Icon name="pin" size={16} className="shrink-0 text-gold-on-dark" />
                 {site.contact.location}
               </span>
+
+              {hasPhone ? (
+                <a
+                  href={telHref(site.contact.phone)}
+                  className="flex w-fit items-center gap-2.5 transition-colors duration-[var(--dur-base)] hover:text-gold-on-dark"
+                >
+                  <Icon name="phone" size={16} className="shrink-0 text-gold-on-dark" />
+                  {site.contact.phone}
+                </a>
+              ) : null}
 
               {hasEmail ? (
                 <a

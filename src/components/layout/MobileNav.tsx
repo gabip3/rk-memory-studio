@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { mainNav, site, isPlaceholder } from "@/lib/site";
+import { mainNav, site, isPlaceholder, telHref } from "@/lib/site";
 import { cn } from "@/lib/cn";
 import { Icon } from "@/components/ui/Icon";
 import { Logo } from "@/components/ui/Logo";
@@ -33,6 +33,7 @@ export function MobileNav({
     href === "/" ? pathname === "/" : pathname.startsWith(href);
 
   const hasEmail = !isPlaceholder(site.contact.email);
+  const hasPhone = !isPlaceholder(site.contact.phone);
   const hasInstagram = !isPlaceholder(site.social.instagram);
 
   return (
@@ -164,6 +165,17 @@ export function MobileNav({
                 Order Status
               </Link>
             </li>
+            {hasPhone ? (
+              <li>
+                <a
+                  href={telHref(site.contact.phone)}
+                  className="flex min-h-12 items-center gap-3 text-[0.9375rem] text-ink-muted transition-colors duration-[var(--dur-base)] hover:text-ink"
+                >
+                  <Icon name="phone" size={18} className="text-gold" />
+                  {site.contact.phone}
+                </a>
+              </li>
+            ) : null}
             {hasEmail ? (
               <li>
                 <a
