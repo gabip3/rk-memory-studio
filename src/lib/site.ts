@@ -64,15 +64,23 @@ export const site = {
    * defaults rather than env-only values: a forgotten variable on a live host
    * would otherwise show customers a "coming soon" state. Env still wins.
    *
-   * The email is the Gmail address, NOT info@rkmemorystudio.com from the card:
-   * that domain has no MX record, so mail sent to it goes nowhere. Switch it
-   * the day a mailbox exists and a test message actually arrives.
+   * >>> THE EMAIL DOES NOT RECEIVE MAIL YET. <<<
+   * info@rkmemorystudio.com is the address the studio prints on its card and
+   * intends to use, but the mailbox has not been bought: rkmemorystudio.com
+   * has no MX record, so anything sent there is rejected by the sender's own
+   * mail server, silently as far as the customer is concerned.
+   *
+   * That is harmless while the site is only a preview nobody is emailing, and
+   * unacceptable the day the domain points at it. Before launch: buy the
+   * mailbox, send a test message, confirm it arrives. Until then
+   * NEXT_PUBLIC_CONTACT_EMAIL=rkmemorystudio@gmail.com switches every contact
+   * surface back to the working Gmail address without a code change.
    *
    * The street address is deliberately absent. The registered address is a
    * home, and the card itself says "Atlanta, GA", so the city is all we show.
    */
   contact: {
-    email: process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "rkmemorystudio@gmail.com",
+    email: process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "info@rkmemorystudio.com",
     phone: process.env.NEXT_PUBLIC_CONTACT_PHONE ?? "678-800-0811",
     location: "Atlanta, Georgia",
     /** Free-form service-area note; safe to edit. */

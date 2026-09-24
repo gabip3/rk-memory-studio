@@ -161,6 +161,9 @@ npm run lint    # eslint
 - [ ] Place one test order and open `orders/RK-XXXXXX.json` in the Blob store:
       that manifest is how photographs are matched to an incoming order
 - [ ] Set `ENQUIRY_TRANSPORT` so the contact and bulk-order forms deliver
-- [x] Add the business email address (rkmemorystudio@gmail.com, in site.ts)
+- [ ] **Buy the info@rkmemorystudio.com mailbox and send it a test message.**
+      The site already shows that address, but the domain has no MX record, so
+      until the mailbox exists every customer email is rejected. Fallback with
+      no code change: `NEXT_PUBLIC_CONTACT_EMAIL=rkmemorystudio@gmail.com`
 - [ ] Add real photography
 - [ ] Have the Privacy Policy legally reviewed; publish Terms, Shipping, Refund
