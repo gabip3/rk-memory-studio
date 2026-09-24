@@ -49,4 +49,11 @@ export interface StorageAdapter {
   /** Reason it is not configured, for staff-facing diagnostics. */
   readonly reason: string;
   store(file: File | Blob, meta: { fileName: string; mimeType: string }): Promise<UploadResult>;
+  /**
+   * Persists the order manifest that links an order reference to the photos
+   * uploaded for it. The checkout provider never sees the photographs, only
+   * the reference, so without this record an incoming order cannot be matched
+   * to any files. Checkout refuses to hand the customer over if this fails.
+   */
+  storeOrder(reference: string, manifest: string): Promise<UploadResult>;
 }

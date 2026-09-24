@@ -49,7 +49,7 @@ items, each rendering an honest placeholder state until you supply the truth:
 | **Instagram posts** | `src/lib/data/social-proof.ts` | Empty array → reserved frames + profile link (once the account is set) |
 | **Terms / Refund policy** | `src/lib/data/policies.ts` | Honest placeholder; Privacy is a factual draft pending legal review |
 | **Contact form delivery** | `ENQUIRY_TRANSPORT` | Form tells customers to email instead of failing silently |
-| **Upload storage** | `UPLOAD_PROVIDER` | `local` writes to disk: **replace before deploying serverless** |
+| **Upload storage** | `UPLOAD_PROVIDER` | `local` writes to disk. Set `vercel-blob` on Vercel: **the local adapter cannot work on serverless** |
 
 ---
 
@@ -156,8 +156,10 @@ npm run lint    # eslint
 - [ ] Configure Check Cherry: see the integration doc
 - [ ] Confirm with Check Cherry that a booking-form field can be pre-filled
       from a URL parameter
-- [ ] Replace the `local` upload provider with an object store if deploying
-      serverless (Vercel/Netlify filesystems are ephemeral)
+- [ ] Set `UPLOAD_PROVIDER=vercel-blob` and link a Blob store (the `local`
+      adapter cannot work on serverless: those filesystems are ephemeral)
+- [ ] Place one test order and open `orders/RK-XXXXXX.json` in the Blob store:
+      that manifest is how photographs are matched to an incoming order
 - [ ] Set `ENQUIRY_TRANSPORT` so the contact and bulk-order forms deliver
 - [x] Add the business email address (rkmemorystudio@gmail.com, in site.ts)
 - [ ] Add real photography

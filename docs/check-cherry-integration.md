@@ -125,6 +125,24 @@ Continue to Checkout                ->  This site mints RK-XXXXXX
 Payment, contract, order record     ->  Check Cherry, reference already filled
 ```
 
+## How you find the photos for an order
+
+Check Cherry never receives the photographs, only the reference. So the moment
+an order is created, and **before** the customer is sent to pay, this site
+writes an order manifest to photo storage:
+
+```
+orders/RK-8819C4.json
+```
+
+It contains the customer, each product, the chosen shape, quantity,
+personalization, and the storage key of every photograph. That file is how a
+paid order becomes a fulfillable one.
+
+If the manifest cannot be written, the checkout stops and tells the customer
+to try again. That is deliberate: an order you cannot connect to any photo is
+worse than an order that never started.
+
 Event and bulk orders take a different, already-built path: the quote form at
 `/bulk-orders` sends an enquiry, and you invoice from Check Cherry the same way
 RK 360 already operates.
