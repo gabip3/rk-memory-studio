@@ -86,10 +86,11 @@ execSync("npx next build", {
   env: {
     ...process.env,
     STATIC_EXPORT: "true",
-    PAGES_BASE_PATH: "/rk-memory-studio",
-    NEXT_PUBLIC_BASE_PATH: "/rk-memory-studio",
+    // Matches the workflow: own domain, served from the root, no basePath.
+    PAGES_BASE_PATH: "",
+    NEXT_PUBLIC_BASE_PATH: "",
     NEXT_PUBLIC_DEMO_MODE: "true",
-    NEXT_PUBLIC_SITE_URL: "https://gabip3.github.io/rk-memory-studio",
+    NEXT_PUBLIC_SITE_URL: "https://www.rkmemorystudio.com",
     NEXT_PUBLIC_SITE_INDEXABLE: "false",
   },
 });

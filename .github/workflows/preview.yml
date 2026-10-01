@@ -49,12 +49,14 @@ jobs:
       - name: Build static preview
         env:
           STATIC_EXPORT: "true"
-          PAGES_BASE_PATH: /rk-memory-studio
-          # next/image leaves its src alone once images are unoptimized, so the
-          # basePath has to be applied by hand. See src/lib/asset.ts.
-          NEXT_PUBLIC_BASE_PATH: /rk-memory-studio
+          # The site has its own domain now (public/CNAME), so it is served from
+          # the root and needs no basePath. Both of these stay empty unless the
+          # site ever moves back under github.io/<repo>, where every link would
+          # need the prefix again. See src/lib/asset.ts.
+          PAGES_BASE_PATH: ""
+          NEXT_PUBLIC_BASE_PATH: ""
           NEXT_PUBLIC_DEMO_MODE: "true"
-          NEXT_PUBLIC_SITE_URL: https://gabip3.github.io/rk-memory-studio
+          NEXT_PUBLIC_SITE_URL: https://www.rkmemorystudio.com
           # Preview must never be indexed: it is not the real site.
           NEXT_PUBLIC_SITE_INDEXABLE: "false"
         run: npm run build
