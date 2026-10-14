@@ -5,7 +5,6 @@ import {
   TextField,
   TextAreaField,
   SelectField,
-  RadioGroupField,
 } from "@/components/ui/Field";
 import { Button } from "@/components/ui/Button";
 import { Icon } from "@/components/ui/Icon";
@@ -213,20 +212,6 @@ export function BulkOrderForm() {
           name="customization"
           rows={3}
           helper="Names, dates, event branding, colours, or anything you would like printed."
-        />
-
-        <RadioGroupField
-          label="Delivery"
-          name="delivery"
-          defaultValue="shipping"
-          options={[
-            { value: "shipping", label: "Shipping", hint: "Sent to your address" },
-            {
-              value: "pickup",
-              label: "Local Pickup",
-              hint: "Collect in the Atlanta area",
-            },
-          ]}
         />
       </fieldset>
 

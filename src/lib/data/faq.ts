@@ -58,16 +58,14 @@ export const faqs: FaqItem[] = [
     id: "production-time",
     question: "How long does production take?",
     answer:
-      "Production timeframes are being confirmed and will be published here before launch. In the meantime, please get in touch with your event date and we will confirm what is possible for your order.",
-    pending: true,
+      "Every order is made after you place it. Production takes up to 5 business days before your keepsakes are handed to the carrier, and delivery time is added on top of that. Holidays and busy periods can add a little, and we will tell you if your order is affected.",
     group: "Orders & Delivery",
   },
   {
     id: "shipping-cost",
     question: "How much is shipping?",
     answer:
-      "Shipping options and costs are being confirmed and will be published here before launch. Local pickup in Atlanta is available - contact us and we will confirm the details for your order.",
-    pending: true,
+      "Standard shipping is free on orders over $49.99. Below that it is calculated at checkout from your delivery address and the service you choose. We ship anywhere in the United States, and everything is posted - we do not offer local collection.",
     group: "Orders & Delivery",
   },
 ];

@@ -10,7 +10,7 @@ const topics = [
   "An order I have placed",
   "Photos and personalization",
   "An event or bulk order",
-  "Shipping or pickup",
+  "Shipping and delivery",
   "Something else",
 ];
 

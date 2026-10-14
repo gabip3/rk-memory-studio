@@ -233,7 +233,7 @@ export function SelectField({
   );
 }
 
-/* ---- Radio group (used for shipping vs pickup) --------------------------- */
+/* ---- Radio group ---------------------------------------------------------- */
 
 export function RadioGroupField({
   label,

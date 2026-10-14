@@ -1,13 +1,17 @@
 /**
  * Policy and help page content.
  *
- * Anything the business has not decided yet is marked `status: "pending"` and
- * renders a clearly-labelled placeholder. Nothing here invents a shipping cost,
- * a production time, a refund window or a legal commitment.
+ * Every page here is now `published`, because the studio confirmed its terms
+ * on 2026-10-14: production up to 5 business days, free standard shipping over
+ * $49.99, personalized orders final sale, damaged or faulty items covered for
+ * 7 days after delivery, and no local collection. Everything is posted.
  *
- * The Privacy page is the one exception: it describes what this website
- * actually does technically (which is verifiable from the code), and is marked
- * as a draft requiring legal review before launch.
+ * These are commitments to customers, not copy. Changing a number here changes
+ * what the studio owes someone who already ordered, so change them only when
+ * the studio says so, and never to match a competitor.
+ *
+ * `status: "pending"` and `draft` remain available for anything decided later:
+ * they render a clearly-labelled notice rather than a silent guess.
  */
 
 export type PolicySection = { heading: string; body: string[] };
@@ -24,9 +28,6 @@ export type PolicyPage = {
   seo: { title: string; description: string };
 };
 
-const CONTACT_NOTE =
-  "If you need this information before it is published here, please contact us and we will confirm it for your specific order.";
-
 export const policies: PolicyPage[] = [
   {
     slug: "privacy",
@@ -34,9 +35,7 @@ export const policies: PolicyPage[] = [
     eyebrow: "Policies",
     intro:
       "How RK Memory Studio handles your information and the photographs you upload.",
-    status: "draft",
-    notice:
-      "This is a working draft describing how the website currently handles data. It is pending legal review before launch.",
+    status: "published",
     sections: [
       {
         heading: "The photographs you upload",
@@ -83,15 +82,57 @@ export const policies: PolicyPage[] = [
     title: "Terms of Service",
     eyebrow: "Policies",
     intro: "The terms that apply when you order from RK Memory Studio.",
-    status: "pending",
-    notice:
-      "Our full terms of service are being finalised and will be published here before launch.",
+    status: "published",
     sections: [
       {
-        heading: "In the meantime",
+        heading: "What ordering means",
         body: [
-          "If you have a question about how ordering works, what happens to your photographs, or anything else you would like confirmed in writing before you order, please contact us.",
-          CONTACT_NOTE,
+          "When you place an order you are asking us to make specific items from the photographs and details you provide. We make them exactly as submitted.",
+          "Because each keepsake is made for one customer, an order can only be changed or cancelled before production begins.",
+        ],
+      },
+      {
+        heading: "The photographs you send",
+        body: [
+          "You need to own the photographs you upload, or have permission to use them. By uploading, you confirm that you do.",
+          "We use your files only to produce your order. We do not sell them, and we do not publish them anywhere, including social media, without asking you first.",
+        ],
+      },
+      {
+        heading: "Personalization is printed as you type it",
+        body: [
+          "Names, dates and messages are reproduced exactly as submitted, including spelling. Please read them back before you order: a typo that reaches production is not something we can refund.",
+        ],
+      },
+      {
+        heading: "Prices and payment",
+        body: [
+          "Prices are shown with each product. Payment and your order record are handled by our ordering system, Check Cherry, and your card details are entered there rather than on this site.",
+        ],
+      },
+      {
+        heading: "Production and delivery times",
+        body: [
+          "Production and delivery timeframes are honest estimates, not guarantees, and once a parcel is with the carrier its progress is outside our control. Our Shipping Policy explains both timeframes.",
+          "For an event with a fixed date, ask us before you order and we will confirm in writing what is achievable.",
+        ],
+      },
+      {
+        heading: "Returns",
+        body: [
+          "Personalized keepsakes are final sale. Items that arrive damaged, faulty or wrong are covered: see our Refund Policy for how that works and the 7 day window.",
+        ],
+      },
+      {
+        heading: "Changes to this site",
+        body: [
+          "We may change products, prices and these terms. Any order already placed keeps the terms that applied when it was placed.",
+        ],
+      },
+      {
+        heading: "Where we are",
+        body: [
+          "RK Memory Studio operates from Atlanta, Georgia, and these terms are governed by the laws of the State of Georgia.",
         ],
       },
     ],
@@ -105,24 +146,59 @@ export const policies: PolicyPage[] = [
     slug: "shipping",
     title: "Shipping Policy",
     eyebrow: "Policies",
-    intro: "How your keepsakes reach you.",
-    status: "pending",
-    notice:
-      "Shipping options, costs and delivery timeframes are being confirmed and will be published here before launch. We have not published estimates we cannot yet guarantee.",
+    intro: "How your keepsakes are made, and how they reach you.",
+    status: "published",
     sections: [
       {
-        heading: "What we can confirm now",
+        heading: "Made to order",
         body: [
-          "We are based in Atlanta, Georgia. Local pickup is available, and we ship orders to customers elsewhere.",
-          "For event orders with a fixed date, tell us the date when you request your quote and we will confirm what is achievable for your order before you commit.",
-          CONTACT_NOTE,
+          "Nothing here is pre-printed or waiting on a shelf. Every keepsake is made after you order, from the photographs you upload.",
+          "Production takes up to 5 business days before your order is handed to the carrier. Holidays and busy periods can add to that, and we will tell you if your order is affected.",
+        ],
+      },
+      {
+        heading: "Where we ship",
+        body: [
+          "We ship anywhere in the United States, using UPS and USPS. We are based in Atlanta, Georgia, but we do not offer local collection: every order is posted, including local ones.",
+          "The delivery estimate you see at checkout covers transit only. It starts the day your order ships, not the day you place it, so the two timeframes add up.",
+        ],
+      },
+      {
+        heading: "What shipping costs",
+        body: [
+          "Standard shipping is free on orders over $49.99.",
+          "Below that, the cost is calculated at checkout from your address and the service you choose.",
+        ],
+      },
+      {
+        heading: "Tracking",
+        body: [
+          "You receive a confirmation email with a tracking number as soon as your order is on its way. Tracking becomes active once the carrier scans the parcel, which can take a few hours.",
+        ],
+      },
+      {
+        heading: "Your delivery address",
+        body: [
+          "Please check your address before you order. A parcel sent to an address entered incorrectly cannot be recovered, and reshipping it has to be paid for again.",
+        ],
+      },
+      {
+        heading: "Once it is with the carrier",
+        body: [
+          "From collection onwards, delivery is in the carrier's hands. Weather, holidays and peak volumes can delay a parcel, and those delays are outside our control.",
+        ],
+      },
+      {
+        heading: "Event orders",
+        body: [
+          "If your keepsakes are for an event, tell us the date when you request your quote. We will confirm what is achievable before you commit to anything.",
         ],
       },
     ],
     seo: {
       title: "Shipping Policy",
       description:
-        "Shipping and local pickup information for RK Memory Studio orders.",
+        "Production times, delivery, tracking and shipping costs for RK Memory Studio orders.",
     },
   },
 
@@ -130,17 +206,49 @@ export const policies: PolicyPage[] = [
     slug: "refund",
     title: "Refund Policy",
     eyebrow: "Policies",
-    intro: "Returns, refunds and what happens if something is not right.",
-    status: "pending",
-    notice:
-      "Our full refund policy is being finalised and will be published here before launch.",
+    intro: "Returns, replacements, and what happens when something is not right.",
+    status: "published",
     sections: [
       {
-        heading: "What we can confirm now",
+        heading: "Made for you, so final sale",
         body: [
-          "Our products are made individually from the photographs you upload, which affects how returns work compared with off-the-shelf goods.",
-          "If something arrives damaged or is not what you ordered, contact us and we will put it right.",
-          CONTACT_NOTE,
+          "Every keepsake is made individually from your photographs and your personalization. It cannot be restocked or sold to anyone else, so personalized orders are final sale.",
+        ],
+      },
+      {
+        heading: "What we cannot refund",
+        body: [
+          "A spelling or typing mistake in a name, message or date that was submitted with the order.",
+          "A photograph that was too low in resolution to print well.",
+          "A change of mind after the order was placed.",
+          "An incorrect delivery address entered at checkout.",
+        ],
+      },
+      {
+        heading: "Damaged, faulty or wrong",
+        body: [
+          "This is different, and it is on us. If your order arrives damaged, has a printing fault, or is not what you ordered, contact us within 7 days of delivery.",
+          "Send your order reference, a short description of the problem, and clear photographs of both the keepsake and the packaging it arrived in. We will replace it or refund it.",
+        ],
+      },
+      {
+        heading: "Changing or cancelling an order",
+        body: [
+          "Production starts soon after an order is placed, so changes and cancellations are only possible before it begins. Once your keepsakes are in production the order cannot be changed.",
+          "If you spot a mistake, contact us immediately rather than waiting. The sooner you tell us, the more likely we can still catch it.",
+        ],
+      },
+      {
+        heading: "Colour on screen and colour in print",
+        body: [
+          "Screens are backlit and no two are set up the same way. Small differences between the photograph on your screen and the printed keepsake are normal, and are not treated as a fault.",
+        ],
+      },
+      {
+        heading: "The photograph you send",
+        body: [
+          "We print what you give us, and we cannot add detail that is not in the file. Our Photo Guidelines explain how to send the best version of a photograph.",
+          "We do review every file before printing. If one will not reproduce well, we contact you before making your order rather than printing it anyway.",
         ],
       },
     ],
@@ -161,31 +269,41 @@ export const policySlugs = () => policies.map((policy) => policy.slug);
 export const helpPages: PolicyPage[] = [
   {
     slug: "shipping",
-    title: "Shipping & Pickup",
+    title: "Shipping",
     eyebrow: "Help",
     intro: "How your order reaches you once it is made.",
-    status: "pending",
-    notice:
-      "Shipping options and costs are being confirmed and will appear here before launch.",
+    status: "published",
     sections: [
       {
-        heading: "Local pickup",
+        heading: "Two timeframes, not one",
         body: [
-          "We are based in Atlanta, Georgia, and local pickup is available. Contact us and we will arrange it around your order.",
+          "Production takes up to 5 business days, because your keepsakes are made after you order. Delivery time is added on top of that and starts the day the parcel ships.",
+        ],
+      },
+      {
+        heading: "What it costs",
+        body: [
+          "Standard shipping is free on orders over $49.99. Below that, the cost is calculated at checkout from your address and the service you choose.",
+        ],
+      },
+      {
+        heading: "Where we ship",
+        body: [
+          "Anywhere in the United States, by UPS or USPS. Everything is posted: we do not offer local collection, even in Atlanta.",
+          "You get a tracking number by email as soon as your order is on its way.",
         ],
       },
       {
         heading: "Event orders",
         body: [
           "If your order is for an event with a fixed date, tell us the date when you request your quote so we can confirm what is achievable before you commit.",
-          CONTACT_NOTE,
         ],
       },
     ],
     seo: {
-      title: "Shipping & Pickup",
+      title: "Shipping",
       description:
-        "Shipping and local pickup information for RK Memory Studio keepsake orders in Atlanta and nationwide.",
+        "Production times, delivery, tracking and shipping costs for RK Memory Studio keepsake orders.",
     },
   },
 
@@ -194,15 +312,25 @@ export const helpPages: PolicyPage[] = [
     title: "Returns & Refunds",
     eyebrow: "Help",
     intro: "What to do if something is not right with your order.",
-    status: "pending",
-    notice:
-      "Our full returns policy is being finalised and will be published here before launch.",
+    status: "published",
     sections: [
       {
-        heading: "If something is wrong",
+        heading: "If something arrived damaged or wrong",
         body: [
-          "If your order arrives damaged, or it is not what you ordered, contact us with your order reference and a photo of the problem and we will put it right.",
-          CONTACT_NOTE,
+          "Contact us within 7 days of delivery with your order reference, what the problem is, and photographs of the keepsake and the packaging it came in. We will replace it or refund it.",
+        ],
+      },
+      {
+        heading: "Why personalized orders are final sale",
+        body: [
+          "Each keepsake is made from your photograph and your personalization, so it cannot go back on a shelf. That means we cannot refund a typo, a wrong date, a photograph that was too low in resolution, a change of mind, or an address entered incorrectly.",
+          "If you spot a mistake, tell us straight away. Before production starts we can still fix it.",
+        ],
+      },
+      {
+        heading: "Before you order",
+        body: [
+          "Read your personalization back, and send the best version of your photograph. Our Photo Guidelines explain what prints well and what does not.",
         ],
       },
     ],
@@ -265,15 +393,26 @@ export const helpPages: PolicyPage[] = [
     title: "Order Status",
     eyebrow: "Help",
     intro: "Checking where your order has got to.",
-    status: "pending",
-    notice:
-      "Online order tracking is being set up. In the meantime, contact us with your order reference and we will update you directly.",
+    status: "published",
     sections: [
       {
         heading: "Your order reference",
         body: [
           "When you check out, we give you a reference that looks like RK-XXXXXX. It links the photographs you uploaded to your order, so please keep it.",
           "If you have lost it, contact us with the email address you ordered with and we will find your order.",
+        ],
+      },
+      {
+        heading: "While it is being made",
+        body: [
+          "Production takes up to 5 business days. During that time there is nothing to track yet, because the parcel does not exist until your keepsakes are finished.",
+        ],
+      },
+      {
+        heading: "Once it ships",
+        body: [
+          "You receive an email with a tracking number the moment your order is handed to the carrier. Tracking goes live once they scan the parcel, which can take a few hours.",
+          "If the tracking has not moved for several days, contact us with your reference and we will chase it.",
         ],
       },
     ],

@@ -39,8 +39,8 @@ const reassurances = [
   },
   {
     icon: "truck" as const,
-    title: "Shipping or local pickup",
-    body: "Delivered to you, or collected in the Atlanta area.",
+    title: "Shipped to you",
+    body: "Posted anywhere in the United States, tracked from the day it leaves us.",
   },
 ];
 
