@@ -9,10 +9,10 @@ import { EventKeepsakes } from "@/components/home/EventKeepsakes";
 import { BulkOrdersCta } from "@/components/home/BulkOrdersCta";
 import { BrandStory } from "@/components/home/BrandStory";
 import { Reviews } from "@/components/home/Reviews";
-import { hasReviews } from "@/lib/data/social-proof";
+import { hasReviews, hasInstagram } from "@/lib/data/social-proof";
 import { InstagramGallery } from "@/components/home/InstagramGallery";
 import { OrganizationJsonLd, WebSiteJsonLd } from "@/components/seo/JsonLd";
-import { site, isPlaceholder, OG_IMAGE } from "@/lib/site";
+import { site, OG_IMAGE } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: `${site.name} | ${site.positioning}`,
@@ -50,8 +50,9 @@ export default function HomePage() {
       <BulkOrdersCta />
       {/* Real, verified reviews only; nothing shows until the first one exists. */}
       {hasReviews() ? <Reviews /> : null}
-      {/* Hidden until the account exists; see site.social.instagram. */}
-      {!isPlaceholder(site.social.instagram) ? <InstagramGallery /> : null}
+      {/* Waits for real posts, not just an account: an empty grid of frames
+          looks worse than no section. See social-proof.ts. */}
+      {hasInstagram() ? <InstagramGallery /> : null}
     </>
   );
 }

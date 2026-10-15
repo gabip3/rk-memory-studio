@@ -92,10 +92,18 @@ export const site = {
     /** Public Etsy storefront. Also set ETSY_SHOP_URL for the checkout handoff. */
     etsy: process.env.NEXT_PUBLIC_ETSY_SHOP_URL ?? PLACEHOLDER,
     /**
-     * No account exists yet, so every Instagram surface (home gallery, header
-     * bar, footer, mobile menu, contact page) stays hidden until this is set.
+     * The account exists (confirmed 2026-10-15), so the header bar, footer,
+     * mobile menu and contact page link to it. Unsetting this hides all of
+     * them again.
+     *
+     * The home gallery is NOT governed by this: it waits for real posts, see
+     * `hasInstagram()` in social-proof.ts. The profile had no posts yet when
+     * this was switched on, and a row of empty frames reads worse than no
+     * section at all.
      */
-    instagram: process.env.NEXT_PUBLIC_INSTAGRAM_URL ?? PLACEHOLDER,
+    instagram:
+      process.env.NEXT_PUBLIC_INSTAGRAM_URL ??
+      "https://www.instagram.com/rkmemorystudio/",
     facebook: process.env.NEXT_PUBLIC_FACEBOOK_URL ?? PLACEHOLDER,
   },
 
