@@ -7,10 +7,6 @@ import type { Product } from "@/lib/data/products";
 /** Each category gets a consistent mark, drawn from the one icon family. */
 const categoryIcon: Record<Product["category"], IconName> = {
   magnets: "magnet",
-  keychains: "key",
-  "photo-strips": "image",
-  "event-keepsakes": "gift",
-  gifts: "gift",
 };
 
 /**

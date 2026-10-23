@@ -76,10 +76,7 @@ const index: SearchResult[] = [
 /** Extra terms that should match an entry without appearing in its copy. */
 const synonyms: Record<string, string> = {
   "custom photo magnets": "fridge refrigerator magnet magnets photo",
-  "photo keychains": "keyring key ring keychain keychains",
-  "photo strips": "photo booth strip strips booth",
   "event keepsakes": "favour favor favours favors guests party",
-  "personalized gifts": "gift gifting present personalised",
   weddings: "wedding bride groom marriage",
   birthdays: "birthday party milestone",
   "baby showers": "baby shower newborn sonogram maternity",
@@ -126,7 +123,6 @@ export function searchSite(query: string, limit = 8): SearchResult[] {
 /** Shown before the customer has typed anything. */
 export const popularSearches = [
   "Photo magnets",
-  "Keychains",
   "Wedding favours",
   "Bulk orders",
   "Photo guidelines",

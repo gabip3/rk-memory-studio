@@ -9,12 +9,14 @@
  * sync with the provider by hand.
  */
 
-export type ProductCategory =
-  | "magnets"
-  | "keychains"
-  | "photo-strips"
-  | "event-keepsakes"
-  | "gifts";
+/**
+ * The studio sells one product line. Keychains, photo strips, event keepsakes
+ * and gifts were removed on 2026-10-23 at the owner's request: those are
+ * quoted per event rather than sold from a shelf, and the keychains moved to
+ * the photo booth business. Adding a category back means adding it here and
+ * giving it an icon in ProductCard.
+ */
+export type ProductCategory = "magnets";
 
 export type QuantityOption = {
   /** Number of finished pieces. */
@@ -218,211 +220,6 @@ export const products: Product[] = [
         "Turn your favourite photographs into personalized custom photo magnets. Upload your photos, add an optional name or date, and we make them individually for you.",
     },
   },
-
-  {
-    slug: "photo-keychains",
-    name: "Personalized Photo Keychains",
-    category: "keychains",
-    tagline: "Carry a moment everywhere you go",
-    cardDescription: "Take your favorite memories everywhere you go.",
-    headline: "Carry Your Memories Everywhere",
-    description:
-      "Transform your favorite photographs into personalized photo keychains - made for " +
-      "family, couples, pets, weddings, graduations and gifts.",
-    details: [
-      "Single photo, double-sided and photo strip styles",
-      "Optional name, date or short message",
-      "Available as event packs for guests and party favours",
-      "Made individually from the photographs you upload",
-    ],
-    quantityOptions: [
-      { count: 1, label: "1 Keychain", default: true },
-      { count: 2, label: "2 Keychains" },
-      { count: 4, label: "4 Keychains" },
-      { count: 6, label: "6 Keychains" },
-      { count: 12, label: "12 Keychains" },
-      { count: 25, label: "25 Keychains", note: "Event Pack" },
-      { count: 50, label: "50 Keychains", note: "Event Pack" },
-    ],
-    photoPolicy: {
-      min: 1,
-      max: "quantity",
-      helper:
-        "Upload one photo per keychain, or a single photo to use across the whole set.",
-    },
-    personalization: STANDARD_PERSONALIZATION,
-    images: [
-      {
-        src: "/images/product-keychains.webp",
-        alt: "Three clear acrylic photo keychains on linen: a mother and daughter at the beach, a golden retriever, and a three-photo strip keychain.",
-        width: 1312,
-        height: 1199,
-      },
-    ],
-    price: null,
-    checkCherryItemId: null,
-    etsyListingId: null,
-    featured: false,
-    bestSeller: true,
-    seo: {
-      title: "Personalized Photo Keychains",
-      description:
-        "Personalized photo keychains made from your own photographs. Single photo, double-sided and photo strip styles for family, couples, pets and events.",
-    },
-  },
-
-  {
-    slug: "photo-strips",
-    name: "Photo Strip Keepsakes",
-    category: "photo-strips",
-    tagline: "The classic booth strip, made to last",
-    cardDescription:
-      "The photo strip you love, reprinted as a keepsake built to survive the fridge door.",
-    headline: "The Photo Strip, Made Permanent",
-    description:
-      "Turn photo booth strips and favourite photo sequences into lasting keepsakes - as " +
-      "magnets, keychains or standalone strips your guests can take home.",
-    details: [
-      "Works with photo booth strips and your own photo sequences",
-      "Available as a magnet, keychain or standalone strip",
-      "Optional names, dates and event details",
-      "A natural pairing with an RK 360 photo booth event",
-    ],
-    quantityOptions: [
-      { count: 6, label: "6 Strips", default: true },
-      { count: 12, label: "12 Strips" },
-      { count: 24, label: "24 Strips" },
-      { count: 50, label: "50 Strips" },
-      { count: 100, label: "100 Strips", note: "Event Pack" },
-    ],
-    photoPolicy: {
-      min: 1,
-      max: "quantity",
-      helper:
-        "Upload the strip itself, or up to four individual photos and we will arrange them.",
-    },
-    personalization: STANDARD_PERSONALIZATION,
-    images: [
-      {
-        src: null,
-        alt: "A photo strip keepsake card showing three photographs of a couple with a handwritten thank you message.",
-        width: 1200,
-        height: 1500,
-      },
-    ],
-    price: null,
-    checkCherryItemId: null,
-    etsyListingId: null,
-    featured: false,
-    bestSeller: false,
-    seo: {
-      title: "Photo Strip Keepsakes",
-      description:
-        "Turn photo booth strips and photo sequences into lasting keepsakes - magnets, keychains and standalone strips personalized with names and dates.",
-    },
-  },
-
-  {
-    slug: "event-keepsakes",
-    name: "Event Keepsakes",
-    category: "event-keepsakes",
-    tagline: "Favours guests actually keep",
-    cardDescription:
-      "Personalized favors your guests will actually want to keep.",
-    headline: "Make Your Celebration Unforgettable",
-    description:
-      "Custom photo magnets and keepsakes created for weddings, birthdays, graduations " +
-      "and corporate events - personalized with photographs, names, dates and designs.",
-    details: [
-      "Designed around your event photography and details",
-      "Names, dates and event branding available",
-      "Coordinated sets for guest tables and favour displays",
-      "Larger celebrations are quoted through our bulk order form",
-    ],
-    quantityOptions: [
-      { count: 25, label: "25 Keepsakes" },
-      { count: 50, label: "50 Keepsakes", default: true },
-      { count: 75, label: "75 Keepsakes" },
-      { count: 100, label: "100 Keepsakes", note: "Event Pack" },
-      { count: 150, label: "150 Keepsakes", note: "Event Pack" },
-      { count: 250, label: "250 Keepsakes", note: "Request a quote" },
-    ],
-    photoPolicy: {
-      min: 1,
-      max: 25,
-      helper:
-        "Upload the photographs and any event artwork you would like us to work from.",
-    },
-    personalization: STANDARD_PERSONALIZATION,
-    images: [
-      {
-        src: "/images/product-event-keepsakes.webp",
-        alt: "A wedding reception favor table covered in square photo magnets of the couple and their guests, beside candles and a vase of white flowers.",
-        width: 1312,
-        height: 1199,
-      },
-    ],
-    price: null,
-    checkCherryItemId: null,
-    etsyListingId: null,
-    featured: false,
-    bestSeller: true,
-    seo: {
-      title: "Event Keepsakes & Favours",
-      description:
-        "Personalized event keepsakes for weddings, birthdays, graduations and corporate events. Custom photo magnets and favours your guests will keep.",
-    },
-  },
-
-  {
-    slug: "personalized-gifts",
-    name: "Personalized Gifts",
-    category: "gifts",
-    tagline: "Something personal, not ordinary",
-    cardDescription:
-      "Give something made from a memory instead of another ordinary gift.",
-    headline: "A Gift Made From a Memory",
-    description:
-      "Create a keepsake built around a photograph that means something - for birthdays, " +
-      "anniversaries, holidays, new parents, or simply because.",
-    details: [
-      "Built from the photograph you choose",
-      "Optional name, date or short message",
-      "Presented as a finished keepsake, ready to give",
-      "Mix products to build a personalized gift set",
-    ],
-    quantityOptions: [
-      { count: 1, label: "Single Gift", default: true },
-      { count: 2, label: "Gift Pair" },
-      { count: 4, label: "Gift Set of 4" },
-      { count: 6, label: "Gift Set of 6" },
-      { count: 12, label: "Gift Set of 12" },
-    ],
-    photoPolicy: {
-      min: 1,
-      max: "quantity",
-      helper: "Upload the photograph you would like the gift built around.",
-    },
-    personalization: STANDARD_PERSONALIZATION,
-    images: [
-      {
-        src: "/images/product-gifts.webp",
-        alt: "Hands opening a kraft gift box holding a square photo magnet of a grandmother and granddaughter cheek to cheek.",
-        width: 1312,
-        height: 1199,
-      },
-    ],
-    price: null,
-    checkCherryItemId: null,
-    etsyListingId: null,
-    featured: false,
-    bestSeller: false,
-    seo: {
-      title: "Personalized Photo Gifts",
-      description:
-        "Personalized photo gifts made from your own photographs - keepsakes for birthdays, anniversaries, holidays and new parents.",
-    },
-  },
 ];
 
 /* ---- Selectors ---------------------------------------------------------- */
@@ -449,24 +246,3 @@ export function maxPhotosFor(product: Product, quantity: number): number {
     ? quantity
     : product.photoPolicy.max;
 }
-
-/* ---- Keychain sub-styles (presented on the keychain section) ------------- */
-
-export const keychainStyles = [
-  {
-    name: "Single Photo Keychain",
-    description: "One photograph, finished on both sides.",
-  },
-  {
-    name: "Double-Sided Photo Keychain",
-    description: "A different memory on each side.",
-  },
-  {
-    name: "Photo Strip Keychain",
-    description: "A full booth strip, shrunk to pocket size.",
-  },
-  {
-    name: "Event Keychain Pack",
-    description: "Matching keychains for every guest.",
-  },
-] as const;

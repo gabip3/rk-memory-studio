@@ -48,7 +48,7 @@ export function SearchOverlay({
               onChange={(event) => setQuery(event.target.value)}
               // Autofocus is correct here: the customer opened a search dialog.
               autoFocus
-              placeholder="Search magnets, keychains, events..."
+              placeholder="Search magnets, events, help..."
               aria-label="Search products, events and questions"
               aria-describedby="search-status"
               className="min-h-12 w-full bg-transparent font-display text-[1.5rem] text-ink outline-none placeholder:text-ink-subtle/60 sm:text-[1.875rem]"

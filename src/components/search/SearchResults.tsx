@@ -27,7 +27,7 @@ export function SearchResults() {
           type="search"
           value={query}
           onChange={(event) => setQuery(event.target.value)}
-          placeholder="Search magnets, keychains, events..."
+          placeholder="Search magnets, events, help..."
           aria-label="Search products, events and questions"
           className="min-h-12 w-full bg-transparent font-display text-[1.5rem] text-ink outline-none placeholder:text-ink-subtle/60"
         />

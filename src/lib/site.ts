@@ -145,26 +145,6 @@ export const mainNav: NavItem[] = [
         hint: "Your memories, on display every day",
       },
       {
-        label: "Photo Keychains",
-        href: "/shop/photo-keychains",
-        hint: "Carry a moment everywhere you go",
-      },
-      {
-        label: "Photo Strips",
-        href: "/shop/photo-strips",
-        hint: "The classic booth strip, made to last",
-      },
-      {
-        label: "Event Keepsakes",
-        href: "/shop/event-keepsakes",
-        hint: "Favours guests actually keep",
-      },
-      {
-        label: "Personalized Gifts",
-        href: "/shop/personalized-gifts",
-        hint: "Something personal, not ordinary",
-      },
-      {
         label: "Bulk Orders",
         href: "/bulk-orders",
         hint: "50, 100, 250 or more",
@@ -194,9 +174,6 @@ export const footerNav: { title: string; links: NavChild[] }[] = [
     title: "Shop",
     links: [
       { label: "Custom Magnets", href: "/shop/custom-photo-magnets" },
-      { label: "Photo Keychains", href: "/shop/photo-keychains" },
-      { label: "Event Keepsakes", href: "/shop/event-keepsakes" },
-      { label: "Personalized Gifts", href: "/shop/personalized-gifts" },
       { label: "Bulk Orders", href: "/bulk-orders" },
     ],
   },

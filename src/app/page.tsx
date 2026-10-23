@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
 import { Hero } from "@/components/home/Hero";
-import { BestSellers } from "@/components/home/BestSellers";
 import { HowItWorks } from "@/components/home/HowItWorks";
 import { MadeJustForYou } from "@/components/home/MadeJustForYou";
 import { FeaturedProduct } from "@/components/home/FeaturedProduct";
-import { Keychains } from "@/components/home/Keychains";
 import { EventKeepsakes } from "@/components/home/EventKeepsakes";
 import { BulkOrdersCta } from "@/components/home/BulkOrdersCta";
 import { BrandStory } from "@/components/home/BrandStory";
@@ -33,7 +31,6 @@ export default function HomePage() {
       <WebSiteJsonLd />
 
       <Hero />
-      <BestSellers />
 
       {/* The beige tray sits on ivory, so this section owns its own spacing */}
       <div className="bg-ivory pb-20 sm:pb-28 lg:pb-36">
@@ -45,7 +42,6 @@ export default function HomePage() {
           the charcoal footer, so the page ends on the bulk card's ivory band. */}
       <BrandStory />
       <FeaturedProduct />
-      <Keychains />
       <EventKeepsakes />
       <BulkOrdersCta />
       {/* Real, verified reviews only; nothing shows until the first one exists. */}

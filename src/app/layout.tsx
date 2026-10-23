@@ -51,11 +51,8 @@ export const metadata: Metadata = {
   applicationName: site.name,
   keywords: [
     "custom photo magnets",
-    "personalized photo keychains",
-    "photo strip keepsakes",
     "wedding favours",
     "event keepsakes",
-    "personalized gifts",
     "Atlanta",
   ],
   authors: [{ name: site.name }],

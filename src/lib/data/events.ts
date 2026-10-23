@@ -30,11 +30,11 @@ export const eventCategories: EventCategory[] = [
       "booth strips and wedding details into keepsakes that leave with them and stay.",
     offerings: [
       "Photo magnets featuring the couple or each guest",
-      "Photo strip keepsakes from the reception booth",
-      "Favour sets personalized with names and the wedding date",
-      "Thank-you keepsakes to send after the day",
+      "Magnets made from the photo booth strips taken on the night",
+      "Magnet favours personalized with your names and the wedding date",
+      "Thank-you magnets to send after the day",
     ],
-    relatedProducts: ["custom-photo-magnets", "photo-strips", "event-keepsakes"],
+    relatedProducts: ["custom-photo-magnets"],
     image: {
       src: "/images/event-weddings.webp",
       alt: "A square photo magnet of a bride and groom on a reception table beside a champagne glass, a candle and a folded napkin.",
@@ -55,11 +55,11 @@ export const eventCategories: EventCategory[] = [
       "and details that make the celebration specific to one person.",
     offerings: [
       "Photo magnets featuring the guest of honour",
-      "Keychains personalized with names and the celebration date",
-      "Matching favour sets for every place setting",
-      "Milestone birthday keepsakes for family",
+      "Magnets personalized with the name and the celebration date",
+      "Matching magnet favours for every place setting",
+      "Milestone birthday magnets for the family",
     ],
-    relatedProducts: ["custom-photo-magnets", "photo-keychains", "event-keepsakes"],
+    relatedProducts: ["custom-photo-magnets"],
     image: {
       src: "/images/event-birthdays.webp",
       alt: "A round photo magnet of a little girl blowing out birthday candles, on a table with leftover cake and party plates.",
@@ -80,11 +80,11 @@ export const eventCategories: EventCategory[] = [
       "turned into keepsakes for family and guests.",
     offerings: [
       "Announcement magnets for family and grandparents",
-      "Shower favours personalized with the baby's name",
-      "Keepsakes built around sonogram and maternity photography",
-      "Matching sets for the gift table",
+      "Shower favour magnets personalized with the baby's name",
+      "Magnets made from sonogram and maternity photography",
+      "Matching magnet sets for the gift table",
     ],
-    relatedProducts: ["custom-photo-magnets", "event-keepsakes", "personalized-gifts"],
+    relatedProducts: ["custom-photo-magnets"],
     image: {
       src: "/images/event-baby-showers.webp",
       alt: "A square photo magnet of a sleeping newborn on a muslin blanket beside a pacifier and a knit bear-ear hat.",
@@ -106,11 +106,11 @@ export const eventCategories: EventCategory[] = [
       "and favours for everyone who came to celebrate.",
     offerings: [
       "Graduation magnets featuring the graduate's portrait",
-      "Keepsakes personalized with the school, year and name",
-      "Favour sets for the graduation party",
-      "Keychains for family and close friends",
+      "Magnets personalized with the school, year and name",
+      "Magnet favours for the graduation party",
+      "Matching sets for family and close friends",
     ],
-    relatedProducts: ["custom-photo-magnets", "photo-keychains", "event-keepsakes"],
+    relatedProducts: ["custom-photo-magnets"],
     image: {
       src: "/images/event-graduations.webp",
       alt: "A round photo magnet of a smiling graduate in cap and gown on a refrigerator, next to a hanging graduation tassel.",
@@ -133,10 +133,10 @@ export const eventCategories: EventCategory[] = [
     offerings: [
       "Branded magnets featuring company logos and event graphics",
       "Custom designs built from your brand artwork",
-      "Activation keepsakes for conferences and trade shows",
-      "Team and milestone keepsakes for staff events",
+      "Activation magnets for conferences and trade shows",
+      "Team and milestone magnets for staff events",
     ],
-    relatedProducts: ["event-keepsakes", "custom-photo-magnets", "photo-strips"],
+    relatedProducts: ["custom-photo-magnets"],
     image: {
       src: "/images/event-corporate.webp",
       alt: "Stacks of branded square magnets printed with a black and gold logo on a registration table at a corporate event, beside lanyards.",
@@ -156,12 +156,12 @@ export const eventCategories: EventCategory[] = [
       "Memorial keepsakes made from the photographs a family wants to hold on to - " +
       "created carefully, and with as much or as little personalization as you would like.",
     offerings: [
-      "Keepsakes made from treasured family photographs",
-      "Keychains for family members to carry",
+      "Magnets made from treasured family photographs",
+      "Matching sets for family members to keep",
       "Sets for a memorial service or celebration of life",
       "Optional names, dates and short inscriptions",
     ],
-    relatedProducts: ["custom-photo-magnets", "photo-keychains", "personalized-gifts"],
+    relatedProducts: ["custom-photo-magnets"],
     image: {
       src: "/images/event-memorial.webp",
       alt: "A square photo magnet of an elderly couple smiling together, on a wooden side table beside a lit candle and reading glasses.",

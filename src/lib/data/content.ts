@@ -65,17 +65,6 @@ export const occasions: string[] = [
   "Gifts",
 ];
 
-/* ---- Keychain section: who it is for ------------------------------------- */
-
-export const keychainAudiences: string[] = [
-  "Family",
-  "Couples",
-  "Pets",
-  "Weddings",
-  "Graduations",
-  "Gifts",
-];
-
 /* ---- Brand story: four values -------------------------------------------- */
 
 export const brandValues: {

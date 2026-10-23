@@ -17,13 +17,13 @@ const crumbs = [
 export const metadata: Metadata = {
   title: "Shop Personalized Keepsakes",
   description:
-    "Custom photo magnets, personalized photo keychains, photo strip keepsakes, event favours and personalized gifts - each one made from the photographs you upload.",
+    "Custom photo magnets in two shapes, made individually from the photographs you upload.",
   alternates: { canonical: "/shop" },
   openGraph: {
     images: [OG_IMAGE],
     title: "Shop Personalized Keepsakes | RK Memory Studio",
     description:
-      "Custom photo magnets, photo keychains, event keepsakes and personalized gifts made from your own photographs.",
+      "Custom photo magnets made from your own photographs, as 2x2 squares or 2.25 rounds.",
     url: "/shop",
   },
 };
@@ -41,7 +41,16 @@ export default function ShopPage() {
       />
 
       <Section tone="ivory" spacing="lg" aria-label="All products">
-        <ul className="grid gap-x-7 gap-y-16 sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-8">
+        {/* One product today, so the card is centred at a readable width
+            rather than stranded in the first cell of a three-column grid.
+            The grid returns on its own if the catalogue grows. */}
+        <ul
+          className={
+            products.length === 1
+              ? "mx-auto max-w-[26rem]"
+              : "grid gap-x-7 gap-y-16 sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-8"
+          }
+        >
           {products.map((product, index) => (
             <Reveal
               as="li"
