@@ -53,9 +53,9 @@ export const site = {
   tagline: "Turning Moments Into Keepsakes",
   positioning: "Custom Photo Magnets & Personalized Keepsakes",
   description:
-    "RK Memory Studio turns your favourite photographs into personalized keepsakes " +
-    "you can hold, display and give - custom photo magnets, photo keychains and " +
-    "event keepsakes made from your own memories.",
+    "RK Memory Studio turns your favourite photographs into custom photo magnets " +
+    "you can hold, display and give - made individually in Atlanta as 2x2 squares " +
+    "or 2.25 rounds, from your own memories.",
   url: SITE_URL,
   locale: "en_US",
 

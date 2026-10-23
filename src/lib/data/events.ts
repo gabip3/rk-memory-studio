@@ -43,7 +43,7 @@ export const eventCategories: EventCategory[] = [
     seo: {
       title: "Wedding Keepsakes & Favours",
       description:
-        "Custom wedding photo magnets, photo strip keepsakes and personalized favours your guests will actually take home and keep.",
+        "Custom wedding photo magnets personalized with your photographs, names and date - favours your guests actually take home and keep.",
     },
   },
   {
@@ -68,7 +68,7 @@ export const eventCategories: EventCategory[] = [
     seo: {
       title: "Birthday Keepsakes & Party Favours",
       description:
-        "Personalized birthday favours featuring photographs, names and celebration dates - photo magnets and keychains made for the guest of honour.",
+        "Personalized birthday photo magnets featuring photographs, names and celebration dates, made for the guest of honour and every guest.",
     },
   },
   {
@@ -93,7 +93,7 @@ export const eventCategories: EventCategory[] = [
     seo: {
       title: "Baby Shower Keepsakes & Favours",
       description:
-        "Baby shower favours and announcement keepsakes personalized with sonogram, maternity and newborn photography.",
+        "Baby shower favour magnets and announcement magnets personalized with sonogram, maternity and newborn photography.",
     },
   },
   {
@@ -119,7 +119,7 @@ export const eventCategories: EventCategory[] = [
     seo: {
       title: "Graduation Keepsakes & Favours",
       description:
-        "Custom graduation photo magnets and keepsakes for graduates, families and guests - personalized with names, schools and graduation year.",
+        "Custom graduation photo magnets for graduates, families and guests, personalized with names, schools and graduation year.",
     },
   },
   {
@@ -145,7 +145,7 @@ export const eventCategories: EventCategory[] = [
     seo: {
       title: "Corporate Event Keepsakes & Branded Favours",
       description:
-        "Branded corporate event keepsakes featuring company logos, event graphics and custom designs for conferences, activations and staff celebrations.",
+        "Branded corporate photo magnets featuring company logos, event graphics and custom designs for conferences, activations and staff celebrations.",
     },
   },
   {
@@ -170,7 +170,7 @@ export const eventCategories: EventCategory[] = [
     seo: {
       title: "Memorial Keepsakes",
       description:
-        "Memorial keepsakes made from treasured family photographs, with optional names, dates and short inscriptions.",
+        "Memorial photo magnets made from treasured family photographs, with optional names, dates and short inscriptions.",
     },
   },
 ];
