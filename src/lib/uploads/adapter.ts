@@ -10,11 +10,18 @@
  * in `adapters` below. Nothing else in the app changes.
  */
 
-import { put } from "@vercel/blob";
-import { mkdir, writeFile } from "node:fs/promises";
+import { get, list, put } from "@vercel/blob";
+import { mkdir, readFile, readdir, stat, writeFile } from "node:fs/promises";
+import { createReadStream } from "node:fs";
+import { Readable } from "node:stream";
 import path from "node:path";
 import { randomUUID } from "node:crypto";
-import type { StorageAdapter, UploadResult } from "./types";
+import type {
+  StorageAdapter,
+  StoredOrder,
+  StoredPhoto,
+  UploadResult,
+} from "./types";
 
 const trim = (v: string | undefined) => (v ?? "").trim();
 
@@ -30,6 +37,29 @@ function safeExtension(fileName: string, mimeType: string): string {
     "image/tiff": ".tif",
   };
   return map[mimeType.toLowerCase()] ?? ".bin";
+}
+
+const CONTENT_TYPES: Record<string, string> = {
+  ".jpg": "image/jpeg",
+  ".jpeg": "image/jpeg",
+  ".png": "image/png",
+  ".webp": "image/webp",
+  ".heic": "image/heic",
+  ".heif": "image/heif",
+  ".tif": "image/tiff",
+};
+
+const contentTypeFor = (key: string) =>
+  CONTENT_TYPES[path.extname(key).toLowerCase()] ?? "application/octet-stream";
+
+/** A storage key comes from a manifest we wrote, but treat it as untrusted:
+ * a "../" in one would otherwise read files outside the upload directory. */
+function isSafeKey(key: string): boolean {
+  return (
+    key.length > 0 &&
+    !key.includes("\\") &&
+    !key.split("/").some((part) => part === ".." || part === "")
+  );
 }
 
 /** Our own references are RK-XXXXXX, but never build a path from unchecked input. */
@@ -89,6 +119,57 @@ const localAdapter: StorageAdapter = {
         error:
           error instanceof Error ? error.message : "Could not record the order.",
       };
+    }
+  },
+
+  async listOrders(limit): Promise<StoredOrder[]> {
+    try {
+      const dir = path.join(localUploadDir, "orders");
+      const names = await readdir(dir);
+      const orders = await Promise.all(
+        names
+          .filter((name) => name.endsWith(".json"))
+          .map(async (name) => ({
+            reference: name.replace(/\.json$/, ""),
+            storedAt: (await stat(path.join(dir, name))).mtime,
+          }))
+      );
+      return orders
+        .sort((a, b) => b.storedAt.getTime() - a.storedAt.getTime())
+        .slice(0, limit);
+    } catch {
+      // No orders directory yet simply means no orders yet.
+      return [];
+    }
+  },
+
+  async readOrder(reference): Promise<string | null> {
+    try {
+      const target = path.join(
+        localUploadDir,
+        "orders",
+        `${safeReference(reference)}.json`
+      );
+      return await readFile(target, "utf8");
+    } catch {
+      return null;
+    }
+  },
+
+  async readPhoto(storageKey): Promise<StoredPhoto | null> {
+    if (!isSafeKey(storageKey)) return null;
+    try {
+      const target = path.join(localUploadDir, storageKey);
+      const info = await stat(target);
+      return {
+        body: Readable.toWeb(
+          createReadStream(target)
+        ) as ReadableStream<Uint8Array>,
+        contentType: contentTypeFor(storageKey),
+        size: info.size,
+      };
+    } catch {
+      return null;
     }
   },
 };
@@ -166,6 +247,50 @@ const vercelBlobAdapter: StorageAdapter = {
       };
     }
   },
+
+  async listOrders(limit): Promise<StoredOrder[]> {
+    try {
+      const { blobs } = await list({ prefix: "orders/", limit });
+      return blobs
+        .map((blob) => ({
+          reference: blob.pathname.replace(/^orders\//, "").replace(/\.json$/, ""),
+          storedAt: blob.uploadedAt ?? null,
+        }))
+        .sort((a, b) => (b.storedAt?.getTime() ?? 0) - (a.storedAt?.getTime() ?? 0));
+    } catch (error) {
+      console.error("[uploads] vercel-blob listOrders failed", error);
+      return [];
+    }
+  },
+
+  async readOrder(reference): Promise<string | null> {
+    try {
+      const result = await get(`orders/${safeReference(reference)}.json`, {
+        access: "private",
+      });
+      if (!result?.stream) return null;
+      return await new Response(result.stream).text();
+    } catch (error) {
+      console.error("[uploads] vercel-blob readOrder failed", error);
+      return null;
+    }
+  },
+
+  async readPhoto(storageKey): Promise<StoredPhoto | null> {
+    if (!isSafeKey(storageKey)) return null;
+    try {
+      const result = await get(storageKey, { access: "private" });
+      if (!result?.stream) return null;
+      return {
+        body: result.stream as ReadableStream<Uint8Array>,
+        contentType: result.blob.contentType ?? contentTypeFor(storageKey),
+        size: result.blob.size ?? null,
+      };
+    } catch (error) {
+      console.error("[uploads] vercel-blob readPhoto failed", error);
+      return null;
+    }
+  },
 };
 
 /* ---- Demo (accepts and DISCARDS files) ------------------------------------ */
@@ -199,6 +324,18 @@ const demoDiscardAdapter: StorageAdapter = {
     );
     return { ok: true, storageKey: `demo-discard/orders/${reference}.json` };
   },
+
+  async listOrders(): Promise<StoredOrder[]> {
+    return [];
+  },
+
+  async readOrder(): Promise<string | null> {
+    return null;
+  },
+
+  async readPhoto(): Promise<StoredPhoto | null> {
+    return null;
+  },
 };
 
 /* ---- Not-configured fallback --------------------------------------------- */
@@ -221,6 +358,18 @@ const unconfiguredAdapter: StorageAdapter = {
       ok: false,
       error: "Photo storage is not configured yet.",
     };
+  },
+
+  async listOrders(): Promise<StoredOrder[]> {
+    return [];
+  },
+
+  async readOrder(): Promise<string | null> {
+    return null;
+  },
+
+  async readPhoto(): Promise<StoredPhoto | null> {
+    return null;
   },
 };
 

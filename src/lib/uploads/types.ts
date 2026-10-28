@@ -56,4 +56,29 @@ export interface StorageAdapter {
    * to any files. Checkout refuses to hand the customer over if this fails.
    */
   storeOrder(reference: string, manifest: string): Promise<UploadResult>;
+
+  /* ---- Reading back, for the studio's own order screen --------------- */
+
+  /** Most recent orders first. The studio has no other way to see them. */
+  listOrders(limit: number): Promise<StoredOrder[]>;
+  /** The manifest JSON for one reference, or null when there is none. */
+  readOrder(reference: string): Promise<string | null>;
+  /**
+   * One uploaded photograph, by the key recorded in the manifest. Returns a
+   * stream so a large original is never held in memory, and the content type
+   * so the browser knows what it received.
+   */
+  readPhoto(storageKey: string): Promise<StoredPhoto | null>;
 }
+
+export type StoredOrder = {
+  reference: string;
+  /** When the manifest was written, which is when the order was placed. */
+  storedAt: Date | null;
+};
+
+export type StoredPhoto = {
+  body: ReadableStream<Uint8Array>;
+  contentType: string;
+  size: number | null;
+};
