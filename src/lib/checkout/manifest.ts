@@ -35,6 +35,8 @@ export type ManifestLine = {
   variantName: string | null;
   quantity: number;
   quantityLabel: string;
+  /** Cents charged for this line, so the manifest explains its own total. */
+  linePrice: number | null;
   personalization: CheckoutDraft["cart"]["lines"][number]["personalization"];
   notes?: string;
   photos: ManifestPhoto[];
@@ -47,6 +49,8 @@ export type OrderManifest = {
   customer?: CheckoutDraft["customer"];
   lines: ManifestLine[];
   totalPhotos: number;
+  /** Cents for the whole order, before shipping and tax. */
+  total: number | null;
 };
 
 export function buildOrderManifest(draft: CheckoutDraft): OrderManifest {
@@ -57,6 +61,7 @@ export function buildOrderManifest(draft: CheckoutDraft): OrderManifest {
     variantName: line.variantName ?? null,
     quantity: line.quantity,
     quantityLabel: line.quantityLabel,
+    linePrice: line.linePrice,
     personalization: line.personalization,
     ...(line.notes ? { notes: line.notes } : {}),
     photos: line.photos.map((photo) => ({
@@ -76,6 +81,9 @@ export function buildOrderManifest(draft: CheckoutDraft): OrderManifest {
     ...(draft.customer ? { customer: draft.customer } : {}),
     lines,
     totalPhotos: lines.reduce((n, line) => n + line.photos.length, 0),
+    total: lines.some((line) => line.linePrice == null)
+      ? null
+      : lines.reduce((sum, line) => sum + (line.linePrice ?? 0), 0),
   };
 }
 
