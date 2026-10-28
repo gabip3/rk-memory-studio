@@ -179,14 +179,20 @@ export const products: Product[] = [
         etsyListingId: null,
       },
     ],
+    /**
+     * Prices in cents, approved by the studio on 2026-10-28. They must match
+     * the quantity tiers configured on the Check Cherry package, which is what
+     * actually charges the customer: a mismatch means the site advertises one
+     * number and the checkout takes another.
+     */
     quantityOptions: [
-      { count: 9, label: "9 Magnets" },
-      { count: 12, label: "12 Magnets", default: true },
-      { count: 18, label: "18 Magnets" },
-      { count: 24, label: "24 Magnets" },
-      { count: 36, label: "36 Magnets" },
-      { count: 50, label: "50 Magnets" },
-      { count: 100, label: "100 Magnets", note: "Event Pack" },
+      { count: 9, label: "9 Magnets", price: 2699 },
+      { count: 12, label: "12 Magnets", price: 3399, default: true },
+      { count: 18, label: "18 Magnets", price: 4799 },
+      { count: 24, label: "24 Magnets", price: 6199 },
+      { count: 36, label: "36 Magnets", price: 8699 },
+      { count: 50, label: "50 Magnets", price: 11499 },
+      { count: 100, label: "100 Magnets", note: "Event Pack", price: 20999 },
     ],
     photoPolicy: {
       min: 1,
@@ -209,7 +215,8 @@ export const products: Product[] = [
         height: 1214,
       },
     ],
-    price: null,
+    /** The lowest tier, so the site and Google can say "from $26.99". */
+    price: 2699,
     checkCherryItemId: null,
     etsyListingId: null,
     featured: true,

@@ -89,6 +89,9 @@ export function WebSiteJsonLd() {
 
 export function ProductJsonLd({ product }: { product: Product }) {
   const rating = aggregateRating(product.slug);
+  const priced = product.quantityOptions
+    .map((option) => option.price)
+    .filter((price): price is number => price != null);
 
   return (
     <JsonLd
@@ -100,12 +103,15 @@ export function ProductJsonLd({ product }: { product: Product }) {
         url: `${SITE_URL}/shop/${product.slug}`,
         brand: { "@type": "Brand", name: site.name },
         category: product.category,
-        // Offers are omitted entirely while Etsy owns pricing: an Offer without
-        // a real price is invalid structured data.
-        ...(product.price != null && {
+        // An Offer without a real price is invalid structured data, so this is
+        // omitted until pricing exists. Priced in tiers, so it is an
+        // AggregateOffer: a single price would misreport six of the seven.
+        ...(priced.length > 0 && {
           offers: {
-            "@type": "Offer",
-            price: (product.price / 100).toFixed(2),
+            "@type": "AggregateOffer",
+            lowPrice: (Math.min(...priced) / 100).toFixed(2),
+            highPrice: (Math.max(...priced) / 100).toFixed(2),
+            offerCount: priced.length,
             priceCurrency: "USD",
             availability: "https://schema.org/InStock",
             url: `${SITE_URL}/shop/${product.slug}`,

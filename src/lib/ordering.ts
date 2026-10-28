@@ -24,3 +24,18 @@ export const orderingMode: OrderingMode =
 
 /** True while the site takes orders by conversation rather than by checkout. */
 export const isEnquiryMode = orderingMode === "enquiry";
+
+/**
+ * Where the "Order now" button sends the customer.
+ *
+ * Check Cherry is the till: it takes the full payment, then sends the customer
+ * the questionnaire that collects the photographs, the shape, the
+ * personalization and the delivery address. The studio already runs it for the
+ * sister business, so orders for both arrive in one place.
+ *
+ * Empty string hides the button and leaves email and phone as the only route,
+ * which is what should happen if the package is ever unpublished.
+ */
+export const orderUrl =
+  process.env.NEXT_PUBLIC_ORDER_URL ??
+  "https://rk-memory-studio.checkcherry.com/reservation/set_event?event_type_id=220490";
