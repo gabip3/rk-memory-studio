@@ -425,7 +425,7 @@ export function CheckoutClient({
 
                 <span className="tabular shrink-0 text-[0.9375rem] font-medium text-ink">
                   {formatPrice(
-                    line.unitPrice == null ? null : line.unitPrice * line.quantity
+                    line.linePrice
                   )}
                 </span>
               </li>

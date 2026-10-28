@@ -46,7 +46,13 @@ export type CartLine = {
   personalization: PersonalizationValues;
   photos: UploadedPhoto[];
   /** Cents. Null while pricing lives entirely with the provider. */
-  unitPrice: number | null;
+  /**
+   * Price in cents for THE WHOLE LINE, not per magnet. Quantities are sold as
+   * packs: 12 magnets cost $33.99 together, so there is no sensible per-piece
+   * figure (it would be 283.25 cents). Multiplying this by `quantity` would charge
+   * twelve times the real price.
+   */
+  linePrice: number | null;
   notes?: string;
   addedAt: number;
 };

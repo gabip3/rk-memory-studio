@@ -14,6 +14,44 @@ export function activeProviderId(): string {
 }
 
 /* ------------------------------------------------------------------------ */
+/* Stripe                                                                    */
+/* ------------------------------------------------------------------------ */
+
+export type StripeConfig = {
+  secretKey: string;
+  /** Cents. Orders at or above this ship free; the policy page says $49.99. */
+  freeShippingThreshold: number;
+  /** Cents charged below that threshold. Zero means shipping is always free. */
+  shippingFlatRate: number;
+  isConfigured: boolean;
+  reason: string;
+};
+
+export function getStripeConfig(): StripeConfig {
+  const secretKey = trim(process.env.STRIPE_SECRET_KEY);
+  const threshold = Number(trim(process.env.SHIPPING_FREE_THRESHOLD_CENTS));
+  const flatRate = Number(trim(process.env.SHIPPING_FLAT_RATE_CENTS));
+
+  let reason = "";
+  if (!secretKey) {
+    reason = "STRIPE_SECRET_KEY is not set.";
+  } else if (!/^sk_(test|live)_/.test(secretKey)) {
+    reason =
+      "STRIPE_SECRET_KEY does not look like a Stripe secret key (sk_test_ or sk_live_).";
+  }
+
+  return {
+    secretKey,
+    freeShippingThreshold: Number.isFinite(threshold) && threshold > 0 ? threshold : 4999,
+    // Defaults to free rather than to a number nobody approved: charging a
+    // shipping fee the studio never agreed to is worse than absorbing it.
+    shippingFlatRate: Number.isFinite(flatRate) && flatRate > 0 ? flatRate : 0,
+    isConfigured: reason === "",
+    reason,
+  };
+}
+
+/* ------------------------------------------------------------------------ */
 /* Check Cherry (active)                                                    */
 /* ------------------------------------------------------------------------ */
 

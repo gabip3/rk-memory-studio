@@ -7,6 +7,7 @@
 
 import { checkCherryProvider } from "./check-cherry";
 import { etsyProvider } from "./etsy";
+import { stripeProvider } from "./stripe";
 import type {
   Cart,
   CartLine,
@@ -25,6 +26,7 @@ import type {
  * acquisition channel later is one env var rather than a rewrite.
  */
 const providers: Record<string, CheckoutProvider> = {
+  stripe: stripeProvider,
   "check-cherry": checkCherryProvider,
   etsy: etsyProvider,
 };
@@ -58,11 +60,9 @@ export function createOrderReference(): OrderReference {
  */
 export function cartSubtotal(lines: CartLine[]): number | null {
   if (lines.length === 0) return null;
-  if (lines.some((line) => line.unitPrice == null)) return null;
-  return lines.reduce(
-    (total, line) => total + (line.unitPrice ?? 0) * line.quantity,
-    0
-  );
+  if (lines.some((line) => line.linePrice == null)) return null;
+  // Pack pricing: the line price is already the total for its quantity.
+  return lines.reduce((total, line) => total + (line.linePrice ?? 0), 0);
 }
 
 export function buildCart(lines: CartLine[]): Cart {

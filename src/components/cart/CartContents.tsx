@@ -128,7 +128,7 @@ export function CartContents() {
                 <div className="mt-4 flex items-center justify-between gap-4">
                   <span className="tabular text-[1rem] font-medium text-ink">
                     {formatPrice(
-                      line.unitPrice == null ? null : line.unitPrice * line.quantity
+                      line.linePrice
                     )}
                   </span>
 

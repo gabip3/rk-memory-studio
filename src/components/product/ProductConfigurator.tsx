@@ -132,7 +132,7 @@ export function ProductConfigurator({ product }: { product: Product }) {
       etsyListingId: variant?.etsyListingId ?? product.etsyListingId,
       personalization,
       photos: usablePhotos,
-      unitPrice: variant?.price ?? quantity.price ?? product.price,
+      linePrice: variant?.price ?? quantity.price ?? product.price,
       addedAt: Date.now(),
     };
 

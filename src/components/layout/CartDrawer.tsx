@@ -150,9 +150,7 @@ export function CartDrawer() {
                     <div className="mt-2.5 flex items-center justify-between gap-3">
                       <span className="tabular text-[0.875rem] font-medium text-ink">
                         {formatPrice(
-                          line.unitPrice == null
-                            ? null
-                            : line.unitPrice * line.quantity
+                          line.linePrice
                         )}
                       </span>
 
