@@ -3,6 +3,9 @@ import { PageHeader } from "@/components/layout/PageHeader";
 import { Section } from "@/components/ui/Section";
 import { CheckoutClient } from "@/components/checkout/CheckoutClient";
 import { getPublicCheckoutStatus } from "@/lib/checkout/config";
+import { OrderByEnquiry } from "@/components/product/OrderByEnquiry";
+import { featuredProduct } from "@/lib/data/products";
+import { isEnquiryMode } from "@/lib/ordering";
 
 export const metadata: Metadata = {
   title: "Checkout",
@@ -21,8 +24,12 @@ export default function CheckoutPage() {
     <>
       <PageHeader
         eyebrow="Checkout"
-        title="Almost There"
-        lede="Confirm your order and we will hand you over to complete payment."
+        title={isEnquiryMode ? "Ordering" : "Almost There"}
+        lede={
+          isEnquiryMode
+            ? "Orders are arranged with the studio, so your keepsakes are made exactly the way you want them."
+            : "Confirm your order and we will hand you over to complete payment."
+        }
         crumbs={[
           { name: "Home", href: "/" },
           { name: "Cart", href: "/cart" },
@@ -31,7 +38,13 @@ export default function CheckoutPage() {
       />
 
       <Section tone="ivory" spacing="lg">
-        <CheckoutClient checkoutReady={ready} provider={provider} shopUrl={shopUrl} />
+        {isEnquiryMode ? (
+          <div className="mx-auto max-w-[34rem]">
+            <OrderByEnquiry product={featuredProduct()} />
+          </div>
+        ) : (
+          <CheckoutClient checkoutReady={ready} provider={provider} shopUrl={shopUrl} />
+        )}
       </Section>
     </>
   );

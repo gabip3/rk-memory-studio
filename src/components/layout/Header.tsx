@@ -8,6 +8,7 @@ import { cn } from "@/lib/cn";
 import { Icon } from "@/components/ui/Icon";
 import { Logo } from "@/components/ui/Logo";
 import { useCart } from "@/lib/cart/CartProvider";
+import { isEnquiryMode } from "@/lib/ordering";
 import { MobileNav } from "./MobileNav";
 import { SearchOverlay } from "./SearchOverlay";
 
@@ -292,6 +293,7 @@ export function Header() {
               <Icon name="user" size={19} />
             </Link>
 
+            {isEnquiryMode ? null : (
             <button
               type="button"
               onClick={openCart}
@@ -315,6 +317,7 @@ export function Header() {
                 {hydrated ? itemCount : 0}
               </span>
             </button>
+            )}
           </div>
         </div>
       </header>

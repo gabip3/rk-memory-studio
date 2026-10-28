@@ -6,6 +6,7 @@ import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { AnnouncementBar } from "@/components/layout/AnnouncementBar";
 import { Header } from "@/components/layout/Header";
 import { CartDrawer } from "@/components/layout/CartDrawer";
+import { isEnquiryMode } from "@/lib/ordering";
 import { Footer } from "@/components/layout/Footer";
 import "./globals.css";
 
@@ -132,7 +133,7 @@ export default function RootLayout({
           </main>
 
           <Footer />
-          <CartDrawer />
+          {isEnquiryMode ? null : <CartDrawer />}
         </CartProvider>
       </body>
     </html>

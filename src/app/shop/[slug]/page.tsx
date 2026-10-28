@@ -9,6 +9,8 @@ import { Photo } from "@/components/ui/Photo";
 import { Icon } from "@/components/ui/Icon";
 import { ProductCard } from "@/components/shop/ProductCard";
 import { ProductConfigurator } from "@/components/product/ProductConfigurator";
+import { OrderByEnquiry } from "@/components/product/OrderByEnquiry";
+import { isEnquiryMode } from "@/lib/ordering";
 import { BreadcrumbJsonLd, ProductJsonLd } from "@/components/seo/JsonLd";
 import { getProduct, products, productSlugs } from "@/lib/data/products";
 import { photoGuidelines } from "@/lib/data/content";
@@ -167,14 +169,18 @@ export default async function ProductPage({ params }: Params) {
             </Reveal>
 
             <div className="mt-12">
-              {/* useSearchParams needs a Suspense boundary in the App Router */}
-              <Suspense
-                fallback={
-                  <div className="u-skeleton h-96 w-full" aria-hidden="true" />
-                }
-              >
-                <ProductConfigurator product={product} />
-              </Suspense>
+              {isEnquiryMode ? (
+                <OrderByEnquiry product={product} />
+              ) : (
+                /* useSearchParams needs a Suspense boundary in the App Router */
+                <Suspense
+                  fallback={
+                    <div className="u-skeleton h-96 w-full" aria-hidden="true" />
+                  }
+                >
+                  <ProductConfigurator product={product} />
+                </Suspense>
+              )}
             </div>
           </div>
         </div>

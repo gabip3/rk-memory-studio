@@ -38,7 +38,8 @@ items, each rendering an honest placeholder state until you supply the truth:
 
 | Item | Where | Current behaviour |
 |---|---|---|
-| **Check Cherry checkout** | `.env.local` | `/checkout` explains it is not live and offers a contact route |
+| **Ordering mode** | `NEXT_PUBLIC_ORDERING_MODE` | `enquiry` (default): catalogue, orders arranged by email or phone, no cart or upload. `online` needs a Node host **and** a checkout provider |
+| **Check Cherry checkout** | `.env.local` | Only reached in `online` mode |
 | ~~Business email~~ | `src/lib/site.ts` | Supplied: rkmemorystudio@gmail.com. Override with `NEXT_PUBLIC_CONTACT_EMAIL` |
 | **Photo strips photo** | `public/images/` | The one image slot still empty: its product page shows a placeholder frame |
 | **Pricing** | `src/lib/data/products.ts` | "Confirmed at checkout": no invented figures |
