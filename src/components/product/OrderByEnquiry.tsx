@@ -33,7 +33,7 @@ export function OrderByEnquiry({ product }: { product: Product }) {
     {
       icon: "cart" as const,
       title: "Choose how many and pay",
-      body: "Pick your quantity and pay in full. Your order is confirmed straight away.",
+      body: "Pick your quantity and pay securely. Your order is confirmed straight away.",
     },
     {
       icon: "camera" as const,
@@ -112,9 +112,6 @@ export function OrderByEnquiry({ product }: { product: Product }) {
           <Button href={orderUrl} variant="solid" size="lg" fullWidth>
             Order Now
           </Button>
-          <p className="mt-3 text-center text-[0.8125rem] leading-relaxed text-ink-subtle">
-            Payment is handled by Check Cherry, our ordering system.
-          </p>
         </div>
       ) : null}
 
