@@ -48,3 +48,10 @@ next-env.d.ts
 
 # local static-preview builds (scripts/build-preview.mjs)
 /.preview-build
+
+# Vercel CLI
+.vercel
+
+# Local env files hold secrets. The example is documentation, so it stays.
+.env*
+!.env.example

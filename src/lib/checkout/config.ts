@@ -35,9 +35,12 @@ export function getStripeConfig(): StripeConfig {
   let reason = "";
   if (!secretKey) {
     reason = "STRIPE_SECRET_KEY is not set.";
-  } else if (!/^sk_(test|live)_/.test(secretKey)) {
+  } else if (!/^(sk|rk)_(test|live)_/.test(secretKey)) {
+    // Stripe issues sk_ for a full secret key and rk_ for a restricted one.
+    // Both can create Checkout Sessions; a restricted key is the safer choice
+    // because it can be scoped to exclude moving money out of the account.
     reason =
-      "STRIPE_SECRET_KEY does not look like a Stripe secret key (sk_test_ or sk_live_).";
+      "STRIPE_SECRET_KEY does not look like a Stripe server key. Expected sk_live_, sk_test_, rk_live_ or rk_test_. A key starting pk_ is the publishable one, which cannot take payments.";
   }
 
   return {
